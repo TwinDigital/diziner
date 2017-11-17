@@ -15,7 +15,7 @@ BaseSettingsModel = Backbone.Model.extend( {
 
 		self.validators = {};
 
-		if ( ! self.controls ) {
+		if ( !self.controls ) {
 			return;
 		}
 
@@ -33,14 +33,14 @@ BaseSettingsModel = Backbone.Model.extend( {
 			// Check if the value is a plain object ( and not an array )
 			var isMultipleControl = jQuery.isPlainObject( control.default_value );
 
-			if ( isMultipleControl  ) {
-				defaults[ field.name ] = _.extend( {}, control.default_value, field['default'] || {} );
+			if ( isMultipleControl ) {
+				defaults[ field.name ] = _.extend( {}, control.default_value, field[ 'default' ] || {} );
 			} else {
-				defaults[ field.name ] = field['default'] || control.default_value;
+				defaults[ field.name ] = field[ 'default' ] || control.default_value;
 			}
 
 			if ( undefined !== attrs[ field.name ] ) {
-				if ( isMultipleControl && ! _.isObject( attrs[ field.name ] ) ) {
+				if ( isMultipleControl && !_.isObject( attrs[ field.name ] ) ) {
 					elementor.debug.addCustomError(
 						new TypeError( 'An invalid argument supplied as multiple control value' ),
 						'InvalidElementData',
@@ -49,6 +49,9 @@ BaseSettingsModel = Backbone.Model.extend( {
 
 					delete attrs[ field.name ];
 				}
+			}
+			if ( undefined !== attrs[ field.disabled ] || true === attrs[ field.disabled ] ) {
+				delete attrs[ field.name ];
 			}
 
 			if ( undefined === attrs[ field.name ] ) {
@@ -67,14 +70,14 @@ BaseSettingsModel = Backbone.Model.extend( {
 		_.each( this.controls, function( field ) {
 			if ( field.is_repeater ) {
 				// TODO: Apply defaults on each field in repeater fields
-				if ( ! ( attrs[ field.name ] instanceof Backbone.Collection ) ) {
+				if ( !( attrs[ field.name ] instanceof Backbone.Collection ) ) {
 					attrs[ field.name ] = new Backbone.Collection( attrs[ field.name ], {
 						model: function( attrs, options ) {
 							options = options || {};
 
 							options.controls = field.fields;
 
-							if ( ! attrs._id ) {
+							if ( !attrs._id ) {
 								attrs._id = elementor.helpers.getUniqueID();
 							}
 
@@ -115,14 +118,14 @@ BaseSettingsModel = Backbone.Model.extend( {
 			return attribute === control.name;
 		} );
 
-		return currentControl && ! _.isEmpty( currentControl.selectors );
+		return currentControl && !_.isEmpty( currentControl.selectors );
 	},
 
 	getClassControls: function( controls ) {
 		controls = controls || this.controls;
 
 		return _.filter( controls, function( control ) {
-			return ! _.isUndefined( control.prefix_class );
+			return !_.isUndefined( control.prefix_class );
 		} );
 	},
 
@@ -131,7 +134,7 @@ BaseSettingsModel = Backbone.Model.extend( {
 			return attribute === control.name;
 		} );
 
-		return currentControl && ! _.isUndefined( currentControl.prefix_class );
+		return currentControl && !_.isUndefined( currentControl.prefix_class );
 	},
 
 	getControl: function( id ) {

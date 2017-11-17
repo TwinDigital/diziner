@@ -40,7 +40,9 @@
  * @return string|array containing the url of the resized modified image
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly.
 
 if ( ! defined( 'BFITHUMB_UPLOAD_DIR' ) ) {
 	define( 'BFITHUMB_UPLOAD_DIR', 'elementor/thumbs' );
@@ -48,10 +50,10 @@ if ( ! defined( 'BFITHUMB_UPLOAD_DIR' ) ) {
 
 if ( ! function_exists( 'bfi_thumb' ) ) {
 
-	function bfi_thumb( $url, $params = array(), $single = true ) {
+	function bfi_thumb( $url, $params = [], $single = true ) {
 		$class = BFI_Class_Factory::getNewestVersion( 'BFI_Thumb' );
 
-		return call_user_func( array( $class, 'thumb' ), $url, $params, $single );
+		return call_user_func( [ $class, 'thumb' ], $url, $params, $single );
 	}
 }
 
@@ -65,22 +67,22 @@ if ( ! class_exists( 'BFI_Class_Factory' ) ) {
 
 	class BFI_Class_Factory {
 
-		public static $versions = array();
-		public static $latestClass = array();
+		public static $versions = [];
+		public static $latestClass = [];
 
 		public static function addClassVersion( $baseClassName, $className, $version ) {
 			if ( empty( self::$versions[ $baseClassName ] ) ) {
-				self::$versions[ $baseClassName ] = array();
+				self::$versions[ $baseClassName ] = [];
 			}
-			self::$versions[ $baseClassName ][] = array(
+			self::$versions[ $baseClassName ][] = [
 				'class' => $className,
 				'version' => $version,
-			);
+			];
 		}
 
 		public static function getNewestVersion( $baseClassName ) {
 			if ( empty( self::$latestClass[ $baseClassName ] ) ) {
-				usort( self::$versions[ $baseClassName ], array( __CLASS__, "versionCompare" ) );
+				usort( self::$versions[ $baseClassName ], [ __CLASS__, "versionCompare" ] );
 				self::$latestClass[ $baseClassName ] = self::$versions[ $baseClassName ][0]['class'];
 				unset( self::$versions[ $baseClassName ] );
 			}
@@ -89,7 +91,7 @@ if ( ! class_exists( 'BFI_Class_Factory' ) ) {
 		}
 
 		public static function versionCompare( $a, $b ) {
-			return version_compare( $a['version'], $b['version'] ) == 1 ? -1 : 1;
+			return version_compare( $a['version'], $b['version'] ) == 1 ? - 1 : 1;
 		}
 	}
 }
@@ -105,10 +107,10 @@ if ( ! function_exists( 'bfi_wp_image_editor' ) ) {
 
 	function bfi_wp_image_editor( $editorArray ) {
 		// Make sure that we use the latest versions
-		return array(
+		return [
 			BFI_Class_Factory::getNewestVersion( 'BFI_Image_Editor_GD' ),
 			BFI_Class_Factory::getNewestVersion( 'BFI_Image_Editor_Imagick' ),
-		);
+		];
 	}
 }
 
@@ -288,8 +290,8 @@ if ( ! class_exists( 'BFI_Image_Editor_GD_1_3' ) ) {
 
 			// find the most opaque pixel in the image (the one with the smallest alpha value)
 			$minalpha = 127;
-			for ( $x = 0; $x < $w; $x++ ) {
-				for ( $y = 0; $y < $h; $y++ ) {
+			for ( $x = 0; $x < $w; $x ++ ) {
+				for ( $y = 0; $y < $h; $y ++ ) {
 					$alpha = ( imagecolorat( $image, $x, $y ) >> 24 ) & 0xFF;
 					if ( $alpha < $minalpha ) {
 						$minalpha = $alpha;
@@ -298,8 +300,8 @@ if ( ! class_exists( 'BFI_Image_Editor_GD_1_3' ) ) {
 			}
 
 			// loop through image pixels and modify alpha for each
-			for ( $x = 0; $x < $w; $x++ ) {
-				for ( $y = 0; $y < $h; $y++ ) {
+			for ( $x = 0; $x < $w; $x ++ ) {
+				for ( $y = 0; $y < $h; $y ++ ) {
 
 					// get current alpha value (represents the TANSPARENCY!)
 					$colorxy = imagecolorat( $image, $x, $y );
@@ -423,7 +425,7 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
 		 *
 		 * @return string|array
 		 */
-		public static function thumb( $url, $params = array(), $single = true ) {
+		public static function thumb( $url, $params = [], $single = true ) {
 			extract( $params );
 
 			//validate inputs
@@ -668,11 +670,11 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
 				$image = $img_url;
 			} else {
 				//array return
-				$image = array(
+				$image = [
 					0 => $img_url,
 					1 => isset( $dst_w ) ? $dst_w : $orig_w,
 					2 => isset( $dst_h ) ? $dst_h : $orig_h,
-				);
+				];
 			}
 
 			return $image;
@@ -691,8 +693,8 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
 			$length = strlen( $number );
 			$result = '';
 
-			$nibbles = array();
-			for ( $i = 0; $i < $length; ++$i ) {
+			$nibbles = [];
+			for ( $i = 0; $i < $length; ++ $i ) {
 				$nibbles[ $i ] = strpos( $digits, $number[ $i ] );
 			}
 
@@ -700,15 +702,15 @@ if ( ! class_exists( 'BFI_Thumb_1_3' ) ) {
 				$value = 0;
 				$newlen = 0;
 
-				for ( $i = 0; $i < $length; ++$i ) {
+				for ( $i = 0; $i < $length; ++ $i ) {
 
 					$value = $value * $fromBase + $nibbles[ $i ];
 
 					if ( $value >= $toBase ) {
-						$nibbles[ $newlen++ ] = (int) ( $value / $toBase );
+						$nibbles[ $newlen ++ ] = (int) ( $value / $toBase );
 						$value %= $toBase;
 					} else if ( $newlen > 0 ) {
-						$nibbles[ $newlen++ ] = 0;
+						$nibbles[ $newlen ++ ] = 0;
 					}
 				}
 
@@ -759,7 +761,7 @@ if ( ! function_exists( 'bfi_image_resize_dimensions' ) ) {
 
 		// the return array matches the parameters to imagecopyresampled()
 		// int dst_x, int dst_y, int src_x, int src_y, int dst_w, int dst_h, int src_w, int src_h
-		return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
+		return [ 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h ];
 	}
 }
 
@@ -794,6 +796,6 @@ if ( ! function_exists( 'bfi_image_downsize' ) ) {
 
 		$resized_img_url = bfi_thumb( $img_url, $params );
 
-		return array( $resized_img_url, $size[0], $size[1], false );
+		return [ $resized_img_url, $size[0], $size[1], false ];
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,39 +13,39 @@ abstract class Settings_Page {
 
 	/**
 	 * @abstract
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	abstract protected function create_tabs();
 
 	/**
 	 * @abstract
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	abstract protected function get_page_title();
 
 	/**
 	 * @static
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final static function get_url() {
 		return admin_url( 'admin.php?page=' . static::PAGE_ID );
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		add_action( 'admin_init', [ $this, 'register_settings_fields' ] );
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final function get_tabs() {
 		$this->ensure_tabs();
 
@@ -52,9 +53,9 @@ abstract class Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final function add_tab( $tab_id, array $tab_args = [] ) {
 		$this->ensure_tabs();
 
@@ -71,9 +72,9 @@ abstract class Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final function add_section( $tab_id, $section_id, array $section_args = [] ) {
 		$this->ensure_tabs();
 
@@ -95,9 +96,9 @@ abstract class Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final function add_field( $tab_id, $section_id, $field_id, array $field_args ) {
 		$this->ensure_tabs();
 
@@ -120,9 +121,9 @@ abstract class Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final function add_fields( $tab_id, $section_id, array $fields ) {
 		foreach ( $fields as $field_id => $field ) {
 			$this->add_field( $tab_id, $section_id, $field_id, $field );
@@ -130,9 +131,9 @@ abstract class Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public final function register_settings_fields() {
 		$controls_class_name = __NAMESPACE__ . '\Settings_Controls';
 
@@ -162,14 +163,10 @@ abstract class Settings_Page {
 
 					$field['field_args']['class'] = implode( ' ', $field_classes );
 
-					add_settings_field(
-						$full_field_id,
-						isset( $field['label'] ) ? $field['label'] : '',
-						[ $controls_class_name, 'render' ],
-						static::PAGE_ID,
-						$full_section_id,
-						$field['field_args']
-					);
+					add_settings_field( $full_field_id, isset( $field['label'] ) ? $field['label'] : '', [
+							$controls_class_name,
+							'render',
+						], static::PAGE_ID, $full_section_id, $field['field_args'] );
 
 					$setting_args = [];
 
@@ -184,15 +181,15 @@ abstract class Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function display_settings_page() {
 		$tabs = $this->get_tabs();
 		?>
-		<div class="wrap">
-			<h1><?php echo $this->get_page_title(); ?></h1>
-			<div id="elementor-settings-tabs-wrapper" class="nav-tab-wrapper">
+        <div class="wrap">
+            <h1><?php echo $this->get_page_title(); ?></h1>
+            <div id="elementor-settings-tabs-wrapper" class="nav-tab-wrapper">
 				<?php
 				foreach ( $tabs as $tab_id => $tab ) {
 					if ( empty( $tab['sections'] ) ) {
@@ -208,8 +205,8 @@ abstract class Settings_Page {
 					echo "<a id='elementor-settings-tab-$tab_id' class='nav-tab$active_class' href='#tab-$tab_id'>$tab[label]</a>";
 				}
 				?>
-			</div>
-			<form id="elementor-settings-form" method="post" action="options.php">
+            </div>
+            <form id="elementor-settings-form" method="post" action="options.php">
 				<?php
 				settings_fields( static::PAGE_ID );
 
@@ -249,15 +246,15 @@ abstract class Settings_Page {
 
 				submit_button();
 				?>
-			</form>
-		</div><!-- /.wrap -->
+            </form>
+        </div><!-- /.wrap -->
 		<?php
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access private
-	*/
+	 */
 	private function ensure_tabs() {
 		if ( null === $this->tabs ) {
 			$this->tabs = $this->create_tabs();

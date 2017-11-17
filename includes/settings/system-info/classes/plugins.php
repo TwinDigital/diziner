@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\System_Info\Classes;
 
 use Elementor\System_Info\Classes\Abstracts\Base_Reporter;
@@ -19,7 +20,7 @@ class Plugins_Reporter extends Base_Reporter {
 			}
 
 			$active_plugins = get_option( 'active_plugins' );
-			$this->plugins  = array_intersect_key( get_plugins(), array_flip( $active_plugins ) );
+			$this->plugins = array_intersect_key( get_plugins(), array_flip( $active_plugins ) );
 		}
 
 		return $this->plugins;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,17 +16,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'link',
- *    	[
- *    		'label' => __( 'Link', 'plugin-domain' ),
- *    		'type' => Controls_Manager::URL,
- *    		'placeholder' => __( 'https://your-link.com', 'plugin-domain' ),
- *    		'default' => [
- *    			'url' => '',
- *    			'is_external' => true,
- *    		]
- *    		'show_external' => true
- *    	]
+ *        'link',
+ *        [
+ *            'label' => __( 'Link', 'plugin-domain' ),
+ *            'type' => Controls_Manager::URL,
+ *            'placeholder' => __( 'https://your-link.com', 'plugin-domain' ),
+ *            'default' => [
+ *                'url' => '',
+ *                'is_external' => true,
+ *            ]
+ *            'show_external' => true
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -50,14 +51,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $description   Optional. The description that appears below the
  *                              field. Default is empty.
  * @param array  $default       {
- *     Optional. The field default values.
+ *                              Optional. The field default values.
  *
- *     @type string $url         Optional. Default is empty.
- *     @type bool   $is_external Optional. Determine whether to open the url in
+ * @type string  $url           Optional. Default is empty.
+ * @type bool    $is_external   Optional. Determine whether to open the url in
  *                               the same tab or in a new one. Default is empty.
- *     @type bool   $nofollow    Optional. Determine whether to add nofolloe
+ * @type bool    $nofollow      Optional. Determine whether to add nofolloe
  *                               attribute. Default is empty.
  * }
+ *
  * @param bool   $show_external Optional. Whether to show 'Is External' button.
  *                              Default is true.
  * @param string $separator     Optional. Set the position of the control separator.
@@ -77,7 +79,7 @@ class Control_URL extends Control_Base_Multiple {
 	/**
 	 * Retrieve url control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -92,7 +94,7 @@ class Control_URL extends Control_Base_Multiple {
 	 * Get the default value of the url control. Used to return the default
 	 * values while initializing the url control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array Control default value.
@@ -111,7 +113,7 @@ class Control_URL extends Control_Base_Multiple {
 	 * Get the default settings of the url control. Used to return the default
 	 * settings while initializing the url control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -130,7 +132,7 @@ class Control_URL extends Control_Base_Multiple {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
@@ -142,29 +144,34 @@ class Control_URL extends Control_Base_Multiple {
 
 		$nofollow_control_uid = $this->get_control_uid( 'nofollow' );
 		?>
-		<div class="elementor-control-field elementor-control-url-external-{{{ data.show_external ? 'show' : 'hide' }}}">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<input id="<?php echo $control_uid; ?>" type="url" class="elementor-input" data-setting="url" placeholder="{{ data.placeholder }}" />
-				<label for="<?php echo $more_input_control_uid; ?>" class="elementor-control-url-more tooltip-target" data-tooltip="<?php _e( 'Link Options', 'elementor' ); ?>">
-					<i class="fa fa-cog"></i>
-				</label>
-				<input id="<?php echo $more_input_control_uid; ?>" type="checkbox" class="elementor-control-url-more-input">
-				<div class="elementor-control-url-more-options">
-					<div class="elementor-control-url-option">
-						<input id="<?php echo $is_external_control_uid; ?>" type="checkbox" class="elementor-control-url-option-input" data-setting="is_external">
-						<label for="<?php echo $is_external_control_uid; ?>"><?php echo __( 'Open in new window', 'elementor' ); ?></label>
-					</div>
-					<div class="elementor-control-url-option">
-						<input id="<?php echo $nofollow_control_uid; ?>" type="checkbox" class="elementor-control-url-option-input" data-setting="nofollow">
-						<label for="<?php echo $nofollow_control_uid; ?>"><?php echo __( 'Add nofollow', 'elementor' ); ?></label>
-					</div>
-				</div>
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+        <div class="elementor-control-field elementor-control-url-external-{{{ data.show_external ? 'show' : 'hide' }}}">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <input id="<?php echo $control_uid; ?>" type="url" class="elementor-input" data-setting="url"
+                       placeholder="{{ data.placeholder }}"/>
+                <label for="<?php echo $more_input_control_uid; ?>" class="elementor-control-url-more tooltip-target"
+                       data-tooltip="<?php _e( 'Link Options', 'elementor' ); ?>">
+                    <i class="fa fa-cog"></i>
+                </label>
+                <input id="<?php echo $more_input_control_uid; ?>" type="checkbox"
+                       class="elementor-control-url-more-input">
+                <div class="elementor-control-url-more-options">
+                    <div class="elementor-control-url-option">
+                        <input id="<?php echo $is_external_control_uid; ?>" type="checkbox"
+                               class="elementor-control-url-option-input" data-setting="is_external">
+                        <label for="<?php echo $is_external_control_uid; ?>"><?php echo __( 'Open in new window', 'elementor' ); ?></label>
+                    </div>
+                    <div class="elementor-control-url-option">
+                        <input id="<?php echo $nofollow_control_uid; ?>" type="checkbox"
+                               class="elementor-control-url-option-input" data-setting="nofollow">
+                        <label for="<?php echo $nofollow_control_uid; ?>"><?php echo __( 'Add nofollow', 'elementor' ); ?></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 }

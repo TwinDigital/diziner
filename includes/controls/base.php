@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -73,7 +74,7 @@ abstract class Base_Control {
 	 * Get the list of all the available features. Currently Elementor uses only
 	 * the `UI` feature.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 * @static
 	 *
@@ -86,7 +87,7 @@ abstract class Base_Control {
 	/**
 	 * Retrieve control type.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 * @abstract
 	 */
@@ -97,7 +98,7 @@ abstract class Base_Control {
 	 *
 	 * Initializing the control base class.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 */
 	public function __construct() {
@@ -111,17 +112,18 @@ abstract class Base_Control {
 	 *
 	 * Used to register and enqueue custom scripts and styles used by the control.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 */
-	public function enqueue() {}
+	public function enqueue() {
+	}
 
 	/**
 	 * Retrieve control settings.
 	 *
 	 * Get the control settings or a specific setting value.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param string $setting_key Optional. Specific key to return from the
@@ -149,7 +151,7 @@ abstract class Base_Control {
 	 *
 	 * Used to set or to update the settings of an existing control.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 *
 	 * @param string $key   Control settings key.
@@ -168,7 +170,7 @@ abstract class Base_Control {
 	 *
 	 * Note that the content template is wrapped by Base_Control::print_template().
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 * @abstract
 	 */
@@ -181,16 +183,16 @@ abstract class Base_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	final public function print_template() {
 		?>
-		<script type="text/html" id="tmpl-elementor-control-<?php echo esc_attr( $this->get_type() ); ?>-content">
-			<div class="elementor-control-content">
+        <script type="text/html" id="tmpl-elementor-control-<?php echo esc_attr( $this->get_type() ); ?>-content">
+            <div class="elementor-control-content">
 				<?php $this->content_template(); ?>
-			</div>
-		</script>
+            </div>
+        </script>
 		<?php
 	}
 
@@ -200,7 +202,7 @@ abstract class Base_Control {
 	 * Get the default settings of the control. Used to return the default
 	 * settings while initializing the control.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

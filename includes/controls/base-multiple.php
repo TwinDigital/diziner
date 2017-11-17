@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +24,7 @@ abstract class Control_Base_Multiple extends Base_Data_Control {
 	 * Get the default value of the multiple control. Used to return the default
 	 * values while initializing the multiple control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array Control default value.
@@ -37,7 +38,7 @@ abstract class Control_Base_Multiple extends Base_Data_Control {
 	 *
 	 * Get the value of the multiple control from a specific widget settings.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param array $control Control
@@ -56,15 +57,9 @@ abstract class Control_Base_Multiple extends Base_Data_Control {
 			$value = [];
 		}
 
-		$control['default'] = array_merge(
-			$this->get_default_value(),
-			$control['default']
-		);
+		$control['default'] = array_merge( $this->get_default_value(), $control['default'] );
 
-		return array_merge(
-			$control['default'],
-			$value
-		);
+		return array_merge( $control['default'], $value );
 	}
 
 	/**
@@ -73,7 +68,7 @@ abstract class Control_Base_Multiple extends Base_Data_Control {
 	 * Get the style of the control. Used when adding CSS rules to the control
 	 * while extracting CSS from the `selectors` data argument.
 	 *
-	 * @since 1.0.5
+	 * @since  1.0.5
 	 * @access public
 	 *
 	 * @param string $css_property  CSS property.

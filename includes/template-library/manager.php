@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\TemplateLibrary;
 
 use Elementor\Core\Settings\Manager as SettingsManager;
@@ -19,9 +20,9 @@ class Manager {
 	private $_import_images = null;
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		$this->register_default_sources();
 
@@ -29,7 +30,7 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @return Import_Images
 	 */
@@ -42,9 +43,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function register_source( $source_class, $args = [] ) {
 		if ( ! class_exists( $source_class ) ) {
 			return new \WP_Error( 'source_class_name_not_exists' );
@@ -61,9 +62,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function unregister_source( $id ) {
 		if ( ! isset( $this->_registered_sources[ $id ] ) ) {
 			return false;
@@ -75,17 +76,17 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_registered_sources() {
 		return $this->_registered_sources;
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_source( $id ) {
 		$sources = $this->get_registered_sources();
 
@@ -97,9 +98,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_templates() {
 		$templates = [];
 
@@ -111,9 +112,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function save_template( array $args ) {
 		$validate_args = $this->ensure_args( [ 'post_id', 'source', 'content', 'type' ], $args );
 
@@ -145,9 +146,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function update_template( array $template_data ) {
 		// TODO: Temp patch since 1.5.0.
 		if ( isset( $template_data['data'] ) ) {
@@ -180,9 +181,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function update_templates( array $args ) {
 		foreach ( $args['templates'] as $template_data ) {
 			$result = $this->update_template( $template_data );
@@ -196,8 +197,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
+	 *
 	 * @param array $args
 	 *
 	 * @return array|bool|\WP_Error
@@ -223,9 +225,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function delete_template( array $args ) {
 		$validate_args = $this->ensure_args( [ 'source', 'template_id' ], $args );
 
@@ -245,9 +247,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function export_template( array $args ) {
 		$validate_args = $this->ensure_args( [ 'source', 'template_id' ], $args );
 
@@ -266,9 +268,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function import_template() {
 		/** @var Source_Local $source */
 		$source = $this->get_source( 'local' );
@@ -277,33 +279,33 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function on_import_template_success() {
 		wp_redirect( admin_url( 'edit.php?post_type=' . Source_Local::CPT ) );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function on_import_template_error( \WP_Error $error ) {
 		echo $error->get_error_message();
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function on_export_template_error( \WP_Error $error ) {
 		_default_wp_die_handler( $error->get_error_message(), 'Elementor Library' );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function register_default_sources() {
 		$sources = [
 			'local',
@@ -319,9 +321,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function handle_ajax_request( $ajax_request ) {
 		if ( ! Plugin::$instance->editor->verify_request_nonce() ) {
 			wp_send_json_error( new \WP_Error( 'token_expired' ) );
@@ -367,9 +369,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function init_ajax_calls() {
 		$allowed_ajax_requests = [
 			'get_templates',
@@ -389,9 +391,9 @@ class Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function ensure_args( array $required_args, array $specified_args ) {
 		$not_specified_args = array_diff( $required_args, array_keys( array_filter( $specified_args ) ) );
 

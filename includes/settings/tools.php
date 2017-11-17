@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,24 +11,20 @@ class Tools extends Settings_Page {
 	const PAGE_ID = 'elementor-tools';
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function register_admin_menu() {
-		add_submenu_page(
-			Settings::PAGE_ID,
-			__( 'Tools', 'elementor' ),
-			__( 'Tools', 'elementor' ),
-			'manage_options',
-			self::PAGE_ID,
-			[ $this, 'display_settings_page' ]
-		);
+		add_submenu_page( Settings::PAGE_ID, __( 'Tools', 'elementor' ), __( 'Tools', 'elementor' ), 'manage_options', self::PAGE_ID, [
+				$this,
+				'display_settings_page',
+			] );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function ajax_elementor_clear_cache() {
 		check_ajax_referer( 'elementor_clear_cache', '_nonce' );
 
@@ -37,9 +34,9 @@ class Tools extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.1.0
+	 * @since  1.1.0
 	 * @access public
-	*/
+	 */
 	public function ajax_elementor_replace_url() {
 		check_ajax_referer( 'elementor_replace_url', '_nonce' );
 
@@ -58,10 +55,7 @@ class Tools extends Settings_Page {
 		global $wpdb;
 
 		// @codingStandardsIgnoreStart cannot use `$wpdb->prepare` because it remove's the backslashes
-		$rows_affected = $wpdb->query(
-			"UPDATE {$wpdb->postmeta} " .
-			"SET `meta_value` = REPLACE(`meta_value`, '" . str_replace( '/', '\\\/', $from ) . "', '" . str_replace( '/', '\\\/', $to ) . "') " .
-			"WHERE `meta_key` = '_elementor_data' AND `meta_value` LIKE '[%' ;" ); // meta_value LIKE '[%' are json formatted
+		$rows_affected = $wpdb->query( "UPDATE {$wpdb->postmeta} " . "SET `meta_value` = REPLACE(`meta_value`, '" . str_replace( '/', '\\\/', $from ) . "', '" . str_replace( '/', '\\\/', $to ) . "') " . "WHERE `meta_key` = '_elementor_data' AND `meta_value` LIKE '[%' ;" ); // meta_value LIKE '[%' are json formatted
 		// @codingStandardsIgnoreEnd
 
 		if ( false === $rows_affected ) {
@@ -73,36 +67,32 @@ class Tools extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function post_elementor_rollback() {
 		check_admin_referer( 'elementor_rollback' );
 
 		$plugin_slug = basename( ELEMENTOR__FILE__, '.php' );
 
-		$rollback = new Rollback(
-			[
+		$rollback = new Rollback( [
 				'version' => ELEMENTOR_PREVIOUS_STABLE_VERSION,
 				'plugin_name' => ELEMENTOR_PLUGIN_BASE,
 				'plugin_slug' => $plugin_slug,
 				'package_url' => sprintf( 'https://downloads.wordpress.org/plugin/%s.%s.zip', $plugin_slug, ELEMENTOR_PREVIOUS_STABLE_VERSION ),
-			]
-		);
+			] );
 
 		$rollback->run();
 
-		wp_die(
-			'', __( 'Rollback to Previous Version', 'elementor' ), [
+		wp_die( '', __( 'Rollback to Previous Version', 'elementor' ), [
 				'response' => 200,
-			]
-		);
+			] );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -117,9 +107,9 @@ class Tools extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	protected function create_tabs() {
 		return [
 			'general' => [
@@ -221,9 +211,9 @@ class Tools extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.2
+	 * @since  1.5.2
 	 * @access public
-	*/
+	 */
 	public function display_settings_page() {
 		wp_enqueue_script( 'elementor-dialog' );
 
@@ -231,9 +221,9 @@ class Tools extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	protected function get_page_title() {
 		return __( 'Tools', 'elementor' );
 	}

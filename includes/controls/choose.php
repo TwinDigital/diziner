@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,27 +16,27 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'align',
- *    	[
- *    		'label' => __( 'Alignment', 'plugin-domain' ),
- *    		'type' => Controls_Manager::CHOOSE,
- *    		'default' => 'center',
- *    		'options' => [
- *    			'left' => [
- *    				'title' => __( 'Left', 'plugin-domain' ),
- *    				'icon' => 'fa fa-align-left',
- *    			],
- *    			'center' => [
- *    				'title' => __( 'Center', 'plugin-domain' ),
- *    				'icon' => 'fa fa-align-center',
- *    			],
- *    			'right' => [
- *    				'title' => __( 'Right', 'plugin-domain' ),
- *    				'icon' => 'fa fa-align-right',
- *    			],
- *    		],
- *    		'toggle' => true,
- *    	]
+ *        'align',
+ *        [
+ *            'label' => __( 'Alignment', 'plugin-domain' ),
+ *            'type' => Controls_Manager::CHOOSE,
+ *            'default' => 'center',
+ *            'options' => [
+ *                'left' => [
+ *                    'title' => __( 'Left', 'plugin-domain' ),
+ *                    'icon' => 'fa fa-align-left',
+ *                ],
+ *                'center' => [
+ *                    'title' => __( 'Center', 'plugin-domain' ),
+ *                    'icon' => 'fa fa-align-center',
+ *                ],
+ *                'right' => [
+ *                    'title' => __( 'Right', 'plugin-domain' ),
+ *                    'icon' => 'fa fa-align-right',
+ *                ],
+ *            ],
+ *            'toggle' => true,
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -57,16 +58,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $default      Optional. The field default value. Default is
  *                             empty.
  * @param array  $options      {
- *     Optional. An array of arrays containing the `title` and the `icon` for
- *     each radio button:
- *     `[ [ 'title' => '', 'icon' => '' ], [ 'title' => '', 'icon' => '' ], ... ]`
- *     Default is an empty array.
+ *                             Optional. An array of arrays containing the `title` and the `icon` for
+ *                             each radio button:
+ *                             `[ [ 'title' => '', 'icon' => '' ], [ 'title' => '', 'icon' => '' ], ... ]`
+ *                             Default is an empty array.
  *
- *     @type string $title Optional. The text that will be shown as a tooltip on
+ * @type string  $title        Optional. The text that will be shown as a tooltip on
  *                         hover. Default is empty.
- *     @type string $icon  Optional. Font icon class name. Can be any class in
+ * @type string  $icon         Optional. Font icon class name. Can be any class in
  *                         the panel, e.g. 'fa fa-align-left' for Font Awesome.
  * }
+ *
  * @param bool   $toggle       Optional. Whether to allow toggle / unset the
  *                             selection. Default is true.
  * @param string $separator    Optional. Set the position of the control separator.
@@ -86,7 +88,7 @@ class Control_Choose extends Base_Data_Control {
 	/**
 	 * Retrieve choose control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -102,29 +104,31 @@ class Control_Choose extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid( '{{value}}' );
 		?>
-		<div class="elementor-control-field">
-			<label class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<div class="elementor-choices">
-					<# _.each( data.options, function( options, value ) { #>
-					<input id="<?php echo $control_uid; ?>" type="radio" name="elementor-choose-{{ data.name }}-{{ data._cid }}" value="{{ value }}">
-					<label class="elementor-choices-label tooltip-target" for="<?php echo $control_uid; ?>" data-tooltip="{{ options.title }}" title="{{ options.title }}">
-						<i class="{{ options.icon }}"></i>
-					</label>
-					<# } ); #>
-				</div>
-			</div>
-		</div>
+        <div class="elementor-control-field">
+            <label class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <div class="elementor-choices">
+                    <# _.each( data.options, function( options, value ) { #>
+                        <input id="<?php echo $control_uid; ?>" type="radio"
+                               name="elementor-choose-{{ data.name }}-{{ data._cid }}" value="{{ value }}">
+                        <label class="elementor-choices-label tooltip-target" for="<?php echo $control_uid; ?>"
+                               data-tooltip="{{ options.title }}" title="{{ options.title }}">
+                            <i class="{{ options.icon }}"></i>
+                        </label>
+                        <# } ); #>
+                </div>
+            </div>
+        </div>
 
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 
@@ -134,7 +138,7 @@ class Control_Choose extends Base_Data_Control {
 	 * Get the default settings of the choose control. Used to return the
 	 * default settings while initializing the choose control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

@@ -1,7 +1,10 @@
 <?php
+
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly.
 
 class Controls_Manager {
 
@@ -71,9 +74,9 @@ class Controls_Manager {
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
-	*/
+	 */
 	private static function init_tabs() {
 		self::$tabs = [
 			self::TAB_CONTENT => __( 'Content', 'elementor' ),
@@ -89,9 +92,9 @@ class Controls_Manager {
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
-	*/
+	 */
 	public static function get_tabs() {
 		if ( ! self::$tabs ) {
 			self::init_tabs();
@@ -102,9 +105,9 @@ class Controls_Manager {
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
-	*/
+	 */
 	public static function add_tab( $tab_name, $tab_title ) {
 		if ( ! self::$tabs ) {
 			self::init_tabs();
@@ -119,7 +122,7 @@ class Controls_Manager {
 
 	/**
 	 * @access private
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	private function register_controls() {
 		$this->controls = [];
@@ -180,7 +183,7 @@ class Controls_Manager {
 
 		// Group Controls
 		$this->control_groups['background'] = new Group_Control_Background();
-		$this->control_groups['border']     = new Group_Control_Border();
+		$this->control_groups['border'] = new Group_Control_Border();
 		$this->control_groups['typography'] = new Group_Control_Typography();
 		$this->control_groups['image-size'] = new Group_Control_Image_Size();
 		$this->control_groups['box-shadow'] = new Group_Control_Box_Shadow();
@@ -191,9 +194,9 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
-	 * @param $control_id
+	 * @param              $control_id
 	 * @param Base_Control $control_instance
 	 */
 	public function register_control( $control_id, Base_Control $control_instance ) {
@@ -202,9 +205,10 @@ class Controls_Manager {
 
 	/**
 	 * @access public
+	 *
 	 * @param $control_id
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return bool
 	 */
 	public function unregister_control( $control_id ) {
@@ -219,7 +223,7 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return Base_Control[]
 	 */
 	public function get_controls() {
@@ -232,7 +236,8 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 *
 	 * @param $control_id
 	 *
 	 * @return bool|\Elementor\Base_Control
@@ -245,7 +250,7 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return array
 	 */
 	public function get_controls_data() {
@@ -264,7 +269,7 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return void
 	 */
 	public function render_controls() {
@@ -290,7 +295,7 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @param $id
 	 * @param $instance
@@ -305,7 +310,7 @@ class Controls_Manager {
 
 	/**
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return void
 	 */
 	public function enqueue_control_scripts() {
@@ -315,9 +320,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function open_stack( Controls_Stack $element ) {
 		$stack_id = $element->get_unique_name();
 
@@ -328,9 +333,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function add_control_to_stack( Controls_Stack $element, $control_id, $control_data, $options = [] ) {
 		if ( ! is_array( $options ) ) {
 			_deprecated_argument( __FUNCTION__, '1.7.0', 'Use `[ \'overwrite\' => ' . var_export( $options, true ) . ' ]` instead.' );
@@ -360,6 +365,7 @@ class Controls_Manager {
 
 		if ( ! $control_type_instance ) {
 			_doing_it_wrong( __CLASS__ . '::' . __FUNCTION__, 'Control type `' . $control_data['type'] . '` not found`', '1.0.0' );
+
 			return false;
 		}
 
@@ -405,9 +411,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function remove_control_from_stack( $stack_id, $control_id ) {
 		if ( is_array( $control_id ) ) {
 			foreach ( $control_id as $id ) {
@@ -427,8 +433,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.1.0
+	 * @since  1.1.0
 	 * @access public
+	 *
 	 * @param string $stack_id
 	 * @param string $control_id
 	 *
@@ -443,9 +450,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.1.0
+	 * @since  1.1.0
 	 * @access public
-	*/
+	 */
 	public function update_control_in_stack( Controls_Stack $element, $control_id, $control_data, array $options = [] ) {
 		$old_control_data = $this->get_control_from_stack( $element->get_unique_name(), $control_id );
 
@@ -463,9 +470,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.7.1
+	 * @since  1.7.1
 	 * @access public
-	*/
+	 */
 	public function get_stacks( $stack_id = null ) {
 		if ( $stack_id ) {
 			if ( isset( $this->stacks[ $stack_id ] ) ) {
@@ -479,9 +486,9 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_element_stack( Controls_Stack $controls_stack ) {
 		$stack_id = $controls_stack->get_unique_name();
 
@@ -503,40 +510,27 @@ class Controls_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @param $element Element_Base
 	 */
 	public function add_custom_css_controls( $element ) {
-		$element->start_controls_section(
-			'section_custom_css_pro',
-			[
-				'label' => __( 'Custom CSS', 'elementor' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED,
-			]
-		);
+		$element->start_controls_section( 'section_custom_css_pro', [
+			'label' => __( 'Custom CSS', 'elementor' ),
+			'tab' => Controls_Manager::TAB_ADVANCED,
+		] );
 
-		$element->add_control(
-			'custom_css_pro',
-			[
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => '<div class="elementor-panel-nerd-box">
+		$element->add_control( 'custom_css_pro', [
+			'type' => Controls_Manager::RAW_HTML,
+			'raw' => '<div class="elementor-panel-nerd-box">
 						<i class="elementor-panel-nerd-box-icon eicon-hypster"></i>
-						<div class="elementor-panel-nerd-box-title">' .
-							__( 'Meet Our Custom CSS', 'elementor' ) .
-						'</div>
-						<div class="elementor-panel-nerd-box-message">' .
-							__( 'Custom CSS lets you add CSS code to any widget, and see it render live right in the editor.', 'elementor' ) .
-						'</div>
-						<div class="elementor-panel-nerd-box-message">' .
-							__( 'This feature is only available on Elementor Pro.', 'elementor' ) .
-						'</div>
-						<a class="elementor-panel-nerd-box-link elementor-button elementor-button-default elementor-go-pro" href="' . Utils::get_pro_link( 'https://elementor.com/pro/?utm_source=panel-custom-css&utm_campaign=gopro&utm_medium=wp-dash' ) . '" target="_blank">' .
-							__( 'Go Pro', 'elementor' ) .
-						'</a>
+						<div class="elementor-panel-nerd-box-title">' . __( 'Meet Our Custom CSS', 'elementor' ) . '</div>
+						<div class="elementor-panel-nerd-box-message">' . __( 'Custom CSS lets you add CSS code to any widget, and see it render live right in the editor.', 'elementor' ) . '</div>
+						<div class="elementor-panel-nerd-box-message">' . __( 'This feature is only available on Elementor Pro.', 'elementor' ) . '</div>
+						<a class="elementor-panel-nerd-box-link elementor-button elementor-button-default elementor-go-pro" href="' . Utils::get_pro_link( 'https://elementor.com/pro/?utm_source=panel-custom-css&utm_campaign=gopro&utm_medium=wp-dash' ) . '" target="_blank">' . __( 'Go Pro', 'elementor' ) . '</a>
 						</div>',
-			]
-		);
+		] );
 
 		$element->end_controls_section();
 	}

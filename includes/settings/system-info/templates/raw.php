@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var int   $tabs_count
  */
 
-$tabs_count++;
+$tabs_count ++;
 
 $required_plugins_properties = array_flip( $required_plugins_properties );
 
@@ -18,14 +18,11 @@ unset( $required_plugins_properties['Name'] );
 foreach ( $reports as $report_name => $report ) :
 	$indent = str_repeat( "\t", $tabs_count - 1 );
 
-	$is_plugins = in_array(
-		$report_name,
-		[
+	$is_plugins = in_array( $report_name, [
 			'plugins',
 			'network_plugins',
 			'mu_plugins',
-		]
-	);
+		] );
 
 	if ( ! $is_plugins ) :
 		echo PHP_EOL . $indent . '== ' . $report['label'] . ' ==';
@@ -60,4 +57,4 @@ foreach ( $reports as $report_name => $report ) :
 	endif;
 endforeach;
 
-$tabs_count--;
+$tabs_count --;

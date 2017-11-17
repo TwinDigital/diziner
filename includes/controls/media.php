@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,14 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'image',
- *    	[
- *    		'label' => __( 'Choose Image', 'plugin-domain' ),
- *    		'type' => Controls_Manager::MEDIA,
- *    		'default' => [
- *    			'url' => Utils::get_placeholder_image_src(),
- *    		]
- *    	]
+ *        'image',
+ *        [
+ *            'label' => __( 'Choose Image', 'plugin-domain' ),
+ *            'type' => Controls_Manager::MEDIA,
+ *            'default' => [
+ *                'url' => Utils::get_placeholder_image_src(),
+ *            ]
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -45,13 +46,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  *                            hover. Default is empty.
  * @param string $description Optional. The description that appears below the
  *                            field. Default is empty.
- * @param array $default      {
- *     Optional. Defautl media values.
+ * @param array  $default     {
+ *                            Optional. Defautl media values.
  *
- *     @type int    $id  Optional. Media id. Default is empty.
- *     @type string $url Optional. Media url. Use `Utils::get_placeholder_image_src()`
+ * @type int     $id          Optional. Media id. Default is empty.
+ * @type string  $url         Optional. Media url. Use `Utils::get_placeholder_image_src()`
  *                       to retrieve Elementor image placeholder. Default is empty.
  * }
+ *
  * @param string $separator   Optional. Set the position of the control separator.
  *                            Available values are 'default', 'before', 'after'
  *                            and 'none'. 'default' will position the separator
@@ -67,8 +69,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array {
  *     An array containing the media ID and URL: `[ 'id' => '', 'url' => '' ]`.
  *
- *     @type int    $id  Media id.
- *     @type string $url Media url.
+ * @type int     $id          Media id.
+ * @type string  $url         Media url.
  * }
  */
 class Control_Media extends Control_Base_Multiple {
@@ -76,7 +78,7 @@ class Control_Media extends Control_Base_Multiple {
 	/**
 	 * Retrieve media control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -91,7 +93,7 @@ class Control_Media extends Control_Base_Multiple {
 	 * Get the default value of the media control. Used to return the default
 	 * values while initializing the media control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array Control default value.
@@ -109,7 +111,7 @@ class Control_Media extends Control_Base_Multiple {
 	 * Used to import media control files from external sites while importing
 	 * Elementor template JSON file, and replacing the old data.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param array $settings Control settings
@@ -139,29 +141,20 @@ class Control_Media extends Control_Base_Multiple {
 	 * Used to register and enqueue custom scripts and styles used by the media
 	 * control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function enqueue() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_enqueue_media();
 
-		wp_enqueue_style(
-			'media',
-			admin_url( '/css/media' . $suffix . '.css' )
-		);
+		wp_enqueue_style( 'media', admin_url( '/css/media' . $suffix . '.css' ) );
 
-		wp_register_script(
-			'image-edit',
-			'/wp-admin/js/image-edit' . $suffix . '.js',
-			[
+		wp_register_script( 'image-edit', '/wp-admin/js/image-edit' . $suffix . '.js', [
 				'jquery',
 				'json2',
 				'imgareaselect',
-			],
-			false,
-			true
-		);
+			], false, true );
 
 		wp_enqueue_script( 'image-edit' );
 	}
@@ -173,29 +166,30 @@ class Control_Media extends Control_Base_Multiple {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<div class="elementor-control-field">
-			<label class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<div class="elementor-control-media">
-					<div class="elementor-control-media-upload-button">
-						<i class="fa fa-plus-circle"></i>
-					</div>
-					<div class="elementor-control-media-image-area">
-						<div class="elementor-control-media-image" style="background-image: url({{ data.controlValue.url }});"></div>
-						<div class="elementor-control-media-delete"><?php _e( 'Delete', 'elementor' ); ?></div>
-					</div>
-				</div>
-			</div>
-			<# if ( data.description ) { #>
-				<div class="elementor-control-field-description">{{{ data.description }}}</div>
-			<# } #>
-			<input type="hidden" data-setting="{{ data.name }}" />
-		</div>
+        <div class="elementor-control-field">
+            <label class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <div class="elementor-control-media">
+                    <div class="elementor-control-media-upload-button">
+                        <i class="fa fa-plus-circle"></i>
+                    </div>
+                    <div class="elementor-control-media-image-area">
+                        <div class="elementor-control-media-image"
+                             style="background-image: url({{ data.controlValue.url }});"></div>
+                        <div class="elementor-control-media-delete"><?php _e( 'Delete', 'elementor' ); ?></div>
+                    </div>
+                </div>
+            </div>
+            <# if ( data.description ) { #>
+                <div class="elementor-control-field-description">{{{ data.description }}}</div>
+                <# } #>
+                    <input type="hidden" data-setting="{{ data.name }}"/>
+        </div>
 		<?php
 	}
 
@@ -205,7 +199,7 @@ class Control_Media extends Control_Base_Multiple {
 	 * Get the default settings of the media control. Used to return the default
 	 * settings while initializing the media control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -221,7 +215,7 @@ class Control_Media extends Control_Base_Multiple {
 	 *
 	 * Get the title of the image selected by the media control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @static
 	 *
@@ -242,7 +236,7 @@ class Control_Media extends Control_Base_Multiple {
 	 *
 	 * Get the alt value of the image selected by the media control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @static
 	 *
@@ -272,6 +266,7 @@ class Control_Media extends Control_Base_Multiple {
 				$alt = $attachment->post_title;
 			}
 		}
+
 		return trim( strip_tags( $alt ) );
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\TemplateLibrary;
 
 use Elementor\Api;
@@ -11,31 +12,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Source_Remote extends Source_Base {
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_id() {
 		return 'remote';
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_title() {
 		return __( 'Remote', 'elementor' );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
-	public function register_data() {}
+	 */
+	public function register_data() {
+	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_items( $args = [] ) {
 		$templates_data = Api::get_templates_data();
 
@@ -55,8 +57,9 @@ class Source_Remote extends Source_Base {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @param array $template_data
 	 *
 	 * @return array
@@ -78,41 +81,41 @@ class Source_Remote extends Source_Base {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function save_item( $template_data ) {
 		return false;
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function update_item( $new_data ) {
 		return false;
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function delete_template( $template_id ) {
 		return false;
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function export_template( $template_id ) {
 		return false;
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function get_data( array $args, $context = 'display' ) {
 		$data = Api::get_template_content( $args['template_id'] );
 

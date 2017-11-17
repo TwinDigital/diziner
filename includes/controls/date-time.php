@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,17 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * A base control for creating date time control. Displays a date/time picker
  * based on the jquery-simple-datetimepicker jQuery plugin
- * @see https://github.com/mugifly/jquery-simple-datetimepicker
+ * @see   https://github.com/mugifly/jquery-simple-datetimepicker
  *
  * Creating new control in the editor (inside `Widget_Base::_register_controls()`
  * method):
  *
  *    $this->add_control(
- *    	'due_date',
- *    	[
- *    		'label' => __( 'Due Date', 'plugin-domain' ),
- *    		'type' => Controls_Manager::DATE_TIME,
- *    	]
+ *        'due_date',
+ *        [
+ *            'label' => __( 'Due Date', 'plugin-domain' ),
+ *            'type' => Controls_Manager::DATE_TIME,
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -51,10 +52,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $default        Optional. Default date in mysql format
  *                               `(YYYY-mm-dd HH:ii)`. Default is empty.
  * @param array  $picker_options Optional. The picker configurations.
- *                               @see http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.html
+ *
+ * @see   http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.html
  *                               But you cannot use `onHide` callback that is
  *                               already in use (`onHide: saveValue()`).
  *                               Default is an empty array.
+ *
  * @param string $separator      Optional. Set the position of the control separator.
  *                               Available values are 'default', 'before', 'after'
  *                               and 'none'. 'default' will position the separator
@@ -72,7 +75,7 @@ class Control_Date_Time extends Base_Data_Control {
 	/**
 	 * Retrieve date time control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -87,7 +90,7 @@ class Control_Date_Time extends Base_Data_Control {
 	 * Get the default settings of the date time control. Used to return the
 	 * default settings while initializing the date time control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -106,21 +109,22 @@ class Control_Date_Time extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<input id="<?php echo $control_uid; ?>" class="elementor-date-time-picker" type="text" data-setting="{{ data.name }}">
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-			<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <input id="<?php echo $control_uid; ?>" class="elementor-date-time-picker" type="text"
+                       data-setting="{{ data.name }}">
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,40 +20,31 @@ class Settings extends Settings_Page {
 	const TAB_ADVANCED = 'advanced';
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function register_admin_menu() {
-		add_menu_page(
-			__( 'Elementor', 'elementor' ),
-			__( 'Elementor', 'elementor' ),
-			'manage_options',
-			self::PAGE_ID,
-			[ $this, 'display_settings_page' ],
-			'',
-			99
-		);
+		add_menu_page( __( 'Elementor', 'elementor' ), __( 'Elementor', 'elementor' ), 'manage_options', self::PAGE_ID, [
+				$this,
+				'display_settings_page',
+			], '', 99 );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function register_pro_menu() {
-		add_submenu_page(
-			self::PAGE_ID,
-			'',
-			'<span class="dashicons dashicons-star-filled" style="font-size: 17px"></span> ' . __( 'Go Pro', 'elementor' ),
-			'manage_options',
-			'go_elementor_pro',
-			[ $this, 'go_elementor_pro' ]
-		);
+		add_submenu_page( self::PAGE_ID, '', '<span class="dashicons dashicons-star-filled" style="font-size: 17px"></span> ' . __( 'Go Pro', 'elementor' ), 'manage_options', 'go_elementor_pro', [
+				$this,
+				'go_elementor_pro',
+			] );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function go_elementor_pro() {
 		if ( isset( $_GET['page'] ) && 'go_elementor_pro' === $_GET['page'] ) {
 			wp_redirect( Utils::get_pro_link( 'https://elementor.com/pro/?utm_source=wp-menu&utm_campaign=gopro&utm_medium=wp-dash' ) );
@@ -61,9 +53,9 @@ class Settings extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function admin_menu_change_name() {
 		global $submenu;
 
@@ -73,9 +65,9 @@ class Settings extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -90,17 +82,17 @@ class Settings extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.7.5
+	 * @since  1.7.5
 	 * @access public
-	*/
+	 */
 	public function update_css_print_method() {
 		Plugin::$instance->posts_css_manager->clear_cache();
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	protected function create_tabs() {
 		$validations_class_name = __NAMESPACE__ . '\Settings_Validations';
 
@@ -255,12 +247,7 @@ class Settings extends Settings_Page {
 										'external' => __( 'External File', 'elementor' ),
 										'internal' => __( 'Internal Embedding', 'elementor' ),
 									],
-									'desc' => '<div class="elementor-css-print-method-description" data-value="external" style="display: none">' .
-											  __( 'Use external CSS files for all generated stylesheets. Choose this setting for better performance (recommended).', 'elementor' ) .
-											  '</div>' .
-											  '<div class="elementor-css-print-method-description" data-value="internal" style="display: none">' .
-											  __( 'Use internal CSS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments.', 'elementor' ) .
-											  '</div>',
+									'desc' => '<div class="elementor-css-print-method-description" data-value="external" style="display: none">' . __( 'Use external CSS files for all generated stylesheets. Choose this setting for better performance (recommended).', 'elementor' ) . '</div>' . '<div class="elementor-css-print-method-description" data-value="internal" style="display: none">' . __( 'Use internal CSS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments.', 'elementor' ) . '</div>',
 								],
 							],
 							'editor_break_lines' => [
@@ -282,9 +269,9 @@ class Settings extends Settings_Page {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	protected function get_page_title() {
 		return __( 'Elementor', 'elementor' );
 	}

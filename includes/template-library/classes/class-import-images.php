@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\TemplateLibrary\Classes;
 
 class Import_Images {
@@ -6,17 +7,17 @@ class Import_Images {
 	private $_replace_image_ids = [];
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function _get_hash_image( $attachment_url ) {
 		return sha1( $attachment_url );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function _return_saved_image( $attachment ) {
 		global $wpdb;
 
@@ -24,15 +25,10 @@ class Import_Images {
 			return $this->_replace_image_ids[ $attachment['id'] ];
 		}
 
-		$post_id = $wpdb->get_var(
-			$wpdb->prepare(
-				'SELECT `post_id` FROM `' . $wpdb->postmeta . '`
+		$post_id = $wpdb->get_var( $wpdb->prepare( 'SELECT `post_id` FROM `' . $wpdb->postmeta . '`
 					WHERE `meta_key` = \'_elementor_source_image_hash\'
 						AND `meta_value` = %s
-				;',
-				$this->_get_hash_image( $attachment['url'] )
-			)
-		);
+				;', $this->_get_hash_image( $attachment['url'] ) ) );
 
 		if ( $post_id ) {
 			$new_attachment = [
@@ -48,9 +44,9 @@ class Import_Images {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function import( $attachment ) {
 		$saved_image = $this->_return_saved_image( $attachment );
 		if ( $saved_image ) {
@@ -78,11 +74,7 @@ class Import_Images {
 			return false;
 		}
 
-		$upload = wp_upload_bits(
-			$filename,
-			'',
-			$file_content
-		);
+		$upload = wp_upload_bits( $filename, '', $file_content );
 
 		$post = [
 			'post_title' => $filename,
@@ -99,10 +91,7 @@ class Import_Images {
 		}
 
 		$post_id = wp_insert_attachment( $post, $upload['file'] );
-		wp_update_attachment_metadata(
-			$post_id,
-			wp_generate_attachment_metadata( $post_id, $upload['file'] )
-		);
+		wp_update_attachment_metadata( $post_id, wp_generate_attachment_metadata( $post_id, $upload['file'] ) );
 		update_post_meta( $post_id, '_elementor_source_image_hash', $this->_get_hash_image( $attachment['url'] ) );
 
 		$new_attachment = [
@@ -110,13 +99,14 @@ class Import_Images {
 			'url' => $upload['url'],
 		];
 		$this->_replace_image_ids[ $attachment['id'] ] = $new_attachment;
+
 		return $new_attachment;
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		if ( ! function_exists( 'WP_Filesystem' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/file.php';

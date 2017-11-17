@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 use Elementor\TemplateLibrary\Source_Local;
@@ -13,35 +14,36 @@ class Maintenance_Mode {
 
 	/**
 	 * @static
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public static function get( $option, $default = false ) {
 		return get_option( self::OPTION_PREFIX . $option, $default );
 	}
 
 	/**
 	 * @static
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public static function set( $option, $value ) {
 		return update_option( self::OPTION_PREFIX . $option, $value );
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function body_class( $classes ) {
 		$classes[] = 'elementor-maintenance-mode';
 
 		return $classes;
 	}
+
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function template_redirect() {
 		if ( Plugin::$instance->preview->is_preview_mode() ) {
 			return;
@@ -54,9 +56,9 @@ class Maintenance_Mode {
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function template_include( $template ) {
 		// Set the template as `$wp_query->current_object` for `wp_title` and etc.
 		query_posts( [
@@ -75,9 +77,9 @@ class Maintenance_Mode {
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function register_settings_fields( Tools $tools ) {
 		$templates = Plugin::$instance->templates_manager->get_source( 'local' )->get_items( [ 'type' => 'page' ] );
 
@@ -89,14 +91,9 @@ class Maintenance_Mode {
 
 		$template_description = sprintf( ' <a target="_blank" class="elementor-edit-template" style="display: none" href="%s">%s</a>', Utils::get_edit_link( self::get( 'template_id' ) ), __( 'Edit Template', 'elementor' ) );
 
-		$template_description .= '<span class="elementor-maintenance-mode-error" style="display: none">' .
-								 __( 'To enable maintenance mode you have to set a template for the maintenance mode page.', 'elementor' ) .
-								 '<br>' .
-								 sprintf( __( 'Select one or go ahead and <a target="_blank" href="%s">create one</a> now.', 'elementor' ), admin_url( 'post-new.php?post_type=' . Source_Local::CPT ) ) .
-								 '</span>';
+		$template_description .= '<span class="elementor-maintenance-mode-error" style="display: none">' . __( 'To enable maintenance mode you have to set a template for the maintenance mode page.', 'elementor' ) . '<br>' . sprintf( __( 'Select one or go ahead and <a target="_blank" href="%s">create one</a> now.', 'elementor' ), admin_url( 'post-new.php?post_type=' . Source_Local::CPT ) ) . '</span>';
 
-		$tools->add_tab(
-			'maintenance_mode', [
+		$tools->add_tab( 'maintenance_mode', [
 				'label' => __( 'Maintenance Mode', 'elementor' ),
 				'sections' => [
 					'maintenance_mode' => [
@@ -113,15 +110,7 @@ class Maintenance_Mode {
 										self::MODE_COMING_SOON => __( 'Coming Soon', 'elementor' ),
 										self::MODE_MAINTENANCE => __( 'Maintenance', 'elementor' ),
 									],
-									'desc' => '<div class="elementor-maintenance-mode-description" data-value="" style="display: none">' .
-											  __( 'Choose between Coming Soon mode (returning HTTP200) or Maintenance Mode (returning HTTP503).', 'elementor' ) .
-											  '</div>' .
-											  '<div class="elementor-maintenance-mode-description" data-value="maintenance" style="display: none">' .
-											  __( 'Maintenance Mode returns HTTP 503 code, so search engines know to come back a short time later. It is not recommended to use this mode for more than a couple of days.', 'elementor' ) .
-											  '</div>' .
-											  '<div class="elementor-maintenance-mode-description" data-value="coming_soon" style="display: none">' .
-											  __( 'Coming Soon returns HTTP 200 code, meaning the site is ready to be indexed.', 'elementor' ) .
-											  '</div>',
+									'desc' => '<div class="elementor-maintenance-mode-description" data-value="" style="display: none">' . __( 'Choose between Coming Soon mode (returning HTTP200) or Maintenance Mode (returning HTTP503).', 'elementor' ) . '</div>' . '<div class="elementor-maintenance-mode-description" data-value="maintenance" style="display: none">' . __( 'Maintenance Mode returns HTTP 503 code, so search engines know to come back a short time later. It is not recommended to use this mode for more than a couple of days.', 'elementor' ) . '</div>' . '<div class="elementor-maintenance-mode-description" data-value="coming_soon" style="display: none">' . __( 'Coming Soon returns HTTP 200 code, meaning the site is ready to be indexed.', 'elementor' ) . '</div>',
 								],
 							],
 							'maintenance_mode_exclude_mode' => [
@@ -157,14 +146,13 @@ class Maintenance_Mode {
 						],
 					],
 				],
-			]
-		);
+			] );
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function add_menu_in_admin_bar( \WP_Admin_Bar $wp_admin_bar ) {
 		$wp_admin_bar->add_node( [
 			'id' => 'elementor-maintenance-on',
@@ -181,25 +169,34 @@ class Maintenance_Mode {
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function print_style() {
 		?>
-		<style>#wp-admin-bar-elementor-maintenance-on > a { background-color: #dc3232; }
-			#wp-admin-bar-elementor-maintenance-on > .ab-item:before { content: "\f160"; top: 2px; }</style>
+        <style>#wp-admin-bar-elementor-maintenance-on > a {
+                background-color: #dc3232;
+            }
+
+            #wp-admin-bar-elementor-maintenance-on > .ab-item:before {
+                content: "\f160";
+                top: 2px;
+            }</style>
 		<?php
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		$is_enabled = (bool) self::get( 'mode' ) && (bool) self::get( 'template_id' );
 
 		if ( is_admin() ) {
-			add_action( 'elementor/admin/after_create_settings/' . Tools::PAGE_ID, [ $this, 'register_settings_fields' ] );
+			add_action( 'elementor/admin/after_create_settings/' . Tools::PAGE_ID, [
+				$this,
+				'register_settings_fields',
+			] );
 		}
 
 		if ( ! $is_enabled ) {

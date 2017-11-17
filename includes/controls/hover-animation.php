@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'hover_animation',
- *    	[
- *    		'label' => __( 'Hover Animation', 'plugin-domain' ),
- *    		'type' => Controls_Manager::HOVER_ANIMATION,
- *    		'prefix_class' => 'elementor-animation-',
- *    	]
+ *        'hover_animation',
+ *        [
+ *            'label' => __( 'Hover Animation', 'plugin-domain' ),
+ *            'type' => Controls_Manager::HOVER_ANIMATION,
+ *            'prefix_class' => 'elementor-animation-',
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -68,7 +69,7 @@ class Control_Hover_Animation extends Base_Data_Control {
 	/**
 	 * Retrieve hover animation control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -82,7 +83,7 @@ class Control_Hover_Animation extends Base_Data_Control {
 	 *
 	 * Get the available hover animation effects.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @static
 	 *
@@ -131,26 +132,26 @@ class Control_Hover_Animation extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<select id="<?php echo $control_uid; ?>" data-setting="{{ data.name }}">
-					<option value=""><?php _e( 'None', 'elementor' ); ?></option>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <select id="<?php echo $control_uid; ?>" data-setting="{{ data.name }}">
+                    <option value=""><?php _e( 'None', 'elementor' ); ?></option>
 					<?php foreach ( self::get_animations() as $animation_name => $animation_title ) : ?>
-						<option value="<?php echo $animation_name; ?>"><?php echo $animation_title; ?></option>
+                        <option value="<?php echo $animation_name; ?>"><?php echo $animation_title; ?></option>
 					<?php endforeach; ?>
-				</select>
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+                </select>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 
@@ -160,7 +161,7 @@ class Control_Hover_Animation extends Base_Data_Control {
 	 * Get the default settings of the hover animation control. Used to return
 	 * the default settings while initializing the hover animation control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

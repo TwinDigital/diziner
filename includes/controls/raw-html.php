@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'html_message',
- *    	[
- *    		'type' => Controls_Manager::RAW_HTML,
- *    		'raw' => __( 'An important message to show in the panel.', 'your-plugin' ),
- *    		'content_classes' => 'your-class',
- *    	]
+ *        'html_message',
+ *        [
+ *            'type' => Controls_Manager::RAW_HTML,
+ *            'raw' => __( 'An important message to show in the panel.', 'your-plugin' ),
+ *            'content_classes' => 'your-class',
+ *        ]
  *    );
  *
  * @since 1.0.0
@@ -49,7 +50,7 @@ class Control_Raw_Html extends Base_UI_Control {
 	/**
 	 * Retrieve raw html control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -65,15 +66,15 @@ class Control_Raw_Html extends Base_UI_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<# if ( data.label ) { #>
-		<span class="elementor-control-title">{{{ data.label }}}</span>
-		<# } #>
-		<div class="elementor-control-raw-html {{ data.content_classes }}">{{{ data.raw }}}</div>
+        <# if ( data.label ) { #>
+            <span class="elementor-control-title">{{{ data.label }}}</span>
+            <# } #>
+                <div class="elementor-control-raw-html {{ data.content_classes }}">{{{ data.raw }}}</div>
 		<?php
 	}
 
@@ -83,7 +84,7 @@ class Control_Raw_Html extends Base_UI_Control {
 	 * Get the default settings of the raw html control. Used to return the
 	 * default settings while initializing the raw html control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

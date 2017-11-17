@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\System_Info\Classes\Abstracts;
 
 use Elementor\System_Info\Helpers\Model_Helper;

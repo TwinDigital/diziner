@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,9 +14,9 @@ class Rollback {
 	protected $plugin_slug;
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function __construct( $args = [] ) {
 		foreach ( $args as $key => $value ) {
 			$this->{$key} = $value;
@@ -23,38 +24,38 @@ class Rollback {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access private
-	*/
+	 */
 	private function print_inline_style() {
 		?>
-		<style>
-			.wrap {
-				overflow: hidden;
-			}
+        <style>
+            .wrap {
+                overflow: hidden;
+            }
 
-			h1 {
-				background: #9b0a46;
-				text-align: center;
-				color: #fff !important;
-				padding: 70px !important;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-			}
+            h1 {
+                background: #9b0a46;
+                text-align: center;
+                color: #fff !important;
+                padding: 70px !important;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
 
-			h1 img {
-				max-width: 300px;
-				display: block;
-				margin: auto auto 50px;
-			}
-		</style>
+            h1 img {
+                max-width: 300px;
+                display: block;
+                margin: auto auto 50px;
+            }
+        </style>
 		<?php
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	protected function apply_package() {
 		$update_plugins = get_site_transient( 'update_plugins' );
 		if ( ! is_object( $update_plugins ) ) {
@@ -76,9 +77,9 @@ class Rollback {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
-	*/
+	 */
 	protected function upgrade() {
 		require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
@@ -98,9 +99,9 @@ class Rollback {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function run() {
 		$this->apply_package();
 		$this->upgrade();

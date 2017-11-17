@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,9 +20,9 @@ class Embed {
 
 	/**
 	 * @static
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public static function get_video_properties( $video_url ) {
 		foreach ( self::$provider_match_masks as $provider => $match_mask ) {
 			preg_match( $match_mask, $video_url, $matches );
@@ -39,9 +40,9 @@ class Embed {
 
 	/**
 	 * @static
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public static function get_embed_url( $video_url, array $embed_url_params = [] ) {
 		$video_properties = self::get_video_properties( $video_url );
 
@@ -58,9 +59,9 @@ class Embed {
 
 	/**
 	 * @static
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public static function get_embed_html( $video_url, array $embed_url_params = [], array $frame_attributes = [] ) {
 		$video_embed_url = self::get_embed_url( $video_url, $embed_url_params );
 

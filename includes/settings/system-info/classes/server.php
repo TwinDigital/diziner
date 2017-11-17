@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\System_Info\Classes;
 
 use Elementor\Api;
@@ -78,8 +79,7 @@ class Server_Reporter extends Base_Reporter {
 	}
 
 	public function get_elementor_library() {
-		$response = wp_remote_post(
-			Api::$api_info_url, [
+		$response = wp_remote_post( Api::$api_info_url, [
 				'timeout' => 25,
 				'body' => [
 					// Which API version is used
@@ -87,8 +87,7 @@ class Server_Reporter extends Base_Reporter {
 					// Which language to return
 					'site_lang' => get_bloginfo( 'language' ),
 				],
-			]
-		);
+			] );
 
 		if ( is_wp_error( $response ) ) {
 			return [

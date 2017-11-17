@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,29 +18,29 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'width',
- *    	[
- *    		'label' => __( 'Width', 'plugin-domain' ),
- *    		'type' => Controls_Manager::SLIDER,
- *    		'default' => [
- *    			'size' => 1,
- *    		],
- *    		'size_units' => [ 'px', '%' ],
- *    		'range' => [
- *    			'px' => [
- *    				'min' => 0,
- *    				'max' => 1000,
- *    				'step' => 5,
- *    			],
- *    			'%' => [
- *    				'min' => 0,
- *    				'max' => 100,
- *    			],
- *    		],
- *    		'selectors' => [
- *    			'{{WRAPPER}} .box' => 'width: {{SIZE}}{{UNIT}};',
- *    		],
- *    	]
+ *        'width',
+ *        [
+ *            'label' => __( 'Width', 'plugin-domain' ),
+ *            'type' => Controls_Manager::SLIDER,
+ *            'default' => [
+ *                'size' => 1,
+ *            ],
+ *            'size_units' => [ 'px', '%' ],
+ *            'range' => [
+ *                'px' => [
+ *                    'min' => 0,
+ *                    'max' => 1000,
+ *                    'step' => 5,
+ *                ],
+ *                '%' => [
+ *                    'min' => 0,
+ *                    'max' => 100,
+ *                ],
+ *            ],
+ *            'selectors' => [
+ *                '{{WRAPPER}} .box' => 'width: {{SIZE}}{{UNIT}};',
+ *            ],
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -59,26 +60,28 @@ if ( ! defined( 'ABSPATH' ) ) {
  *                            hover. Default is empty.
  * @param string $description Optional. The description that appears below the
  *                            field. Default is empty.
- * @param array $default      {
- *     Optional. Defautl slider value.
+ * @param array  $default     {
+ *                            Optional. Defautl slider value.
  *
- *     @type int $size Optional. The initial size of slider. Default is empty.
+ * @type int     $size        Optional. The initial size of slider. Default is empty.
  * }
- * @param array $size_units   Optional. An array of available CSS units like
+ *
+ * @param array  $size_units  Optional. An array of available CSS units like
  *                            'px', '%' and 'em'. Default is `[ 'px' ]`.
  *
- * @param array $range        {
- *     The range parameter is populated by default with ranges for each register
- *     size (e.g. px|em|rem|%|deg). @see Control_Base_Units::get_default_settings()
+ * @param array  $range       {
+ *                            The range parameter is populated by default with ranges for each register
+ *                            size (e.g. px|em|rem|%|deg). @see Control_Base_Units::get_default_settings()
  *
  *     {
- *      @type integer $min  Optional.The minimum value of range.
- *      @type integer $max  Optional.The maximum value of range.
- *      @type integer $step Optional.The intervals value that will be incremented
+ * @type integer $min         Optional.The minimum value of range.
+ * @type integer $max         Optional.The maximum value of range.
+ * @type integer $step        Optional.The intervals value that will be incremented
  *                          or decremented when using the controls' spinners.
  *     },
  *     ...
  * }
+ *
  * @param string $separator   Optional. Set the position of the control separator.
  *                            Available values are 'default', 'before', 'after'
  *                            and 'none'. 'default' will position the separator
@@ -94,8 +97,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array {
  *     An array containing the size and the unit: `[ 'size' => '', 'unit' => '' ]`.
  *
- *     @type int    $size Selected size.
- *     @type string $unit Selected unit.
+ * @type int     $size        Selected size.
+ * @type string  $unit        Selected unit.
  * }
  */
 class Control_Slider extends Control_Base_Units {
@@ -103,7 +106,7 @@ class Control_Slider extends Control_Base_Units {
 	/**
 	 * Retrieve slider control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -118,17 +121,15 @@ class Control_Slider extends Control_Base_Units {
 	 * Get the default value of the slider control. Used to return the default
 	 * values while initializing the slider control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array Control default value.
 	 */
 	public function get_default_value() {
-		return array_merge(
-			parent::get_default_value(), [
+		return array_merge( parent::get_default_value(), [
 				'size' => '',
-			]
-		);
+			] );
 	}
 
 	/**
@@ -137,17 +138,15 @@ class Control_Slider extends Control_Base_Units {
 	 * Get the default settings of the slider control. Used to return the
 	 * default settings while initializing the slider control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
 	 */
 	protected function get_default_settings() {
-		return array_merge(
-			parent::get_default_settings(), [
+		return array_merge( parent::get_default_settings(), [
 				'label_block' => true,
-			]
-		);
+			] );
 	}
 
 	/**
@@ -157,25 +156,26 @@ class Control_Slider extends Control_Base_Units {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<?php $this->print_units_template(); ?>
-			<div class="elementor-control-input-wrapper elementor-clearfix">
-				<div class="elementor-slider"></div>
-				<div class="elementor-slider-input">
-					<input id="<?php echo $control_uid; ?>" type="number" min="{{ data.min }}" max="{{ data.max }}" step="{{ data.step }}" data-setting="size" />
-				</div>
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+            <div class="elementor-control-input-wrapper elementor-clearfix">
+                <div class="elementor-slider"></div>
+                <div class="elementor-slider-input">
+                    <input id="<?php echo $control_uid; ?>" type="number" min="{{ data.min }}" max="{{ data.max }}"
+                           step="{{ data.step }}" data-setting="size"/>
+                </div>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 }

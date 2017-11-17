@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,12 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->start_controls_section(
- *    	'section_advanced',
- *    	[
- *    		'label' => __( 'Element Style', 'plugin-domain' ),
- *    		'type' => Controls_Manager::SECTION,
- *    		'tab' => Controls_Manager::TAB_ADVANCED,
- *    	]
+ *        'section_advanced',
+ *        [
+ *            'label' => __( 'Element Style', 'plugin-domain' ),
+ *            'type' => Controls_Manager::SECTION,
+ *            'tab' => Controls_Manager::TAB_ADVANCED,
+ *        ]
  *    );
  *
  * @since 1.0.0
@@ -51,7 +52,7 @@ class Control_Section extends Base_UI_Control {
 	/**
 	 * Retrieve section control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -67,17 +68,17 @@ class Control_Section extends Base_UI_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<div class="elementor-panel-heading">
-			<div class="elementor-panel-heading-toggle elementor-section-toggle" data-collapse_id="{{ data.name }}">
-				<i class="fa"></i>
-			</div>
-			<div class="elementor-panel-heading-title elementor-section-title">{{{ data.label }}}</div>
-		</div>
+        <div class="elementor-panel-heading">
+            <div class="elementor-panel-heading-toggle elementor-section-toggle" data-collapse_id="{{ data.name }}">
+                <i class="fa"></i>
+            </div>
+            <div class="elementor-panel-heading-title elementor-section-title">{{{ data.label }}}</div>
+        </div>
 		<?php
 	}
 
@@ -87,7 +88,7 @@ class Control_Section extends Base_UI_Control {
 	 * Get the default settings of the repeater control. Used to return the
 	 * default settings while initializing the repeater control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\System_Info\Helpers;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -7,7 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Model_Helper {
 
-	private function __construct() {}
+	private function __construct() {
+	}
 
 	public static function filter_possible_properties( $possible_properties, $properties ) {
 		$properties_keys = array_flip( $possible_properties );

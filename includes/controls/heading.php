@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,13 +16,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'title',
- *    	[
- *    		'label' => __( 'Title', 'plugin-domain' ),
- *    		'type' => Controls_Manager::HEADING,
- *    		'description' => __( 'My Header', 'plugin-domain' ),
- *    		'separator' => 'before',
- *    	]
+ *        'title',
+ *        [
+ *            'label' => __( 'Title', 'plugin-domain' ),
+ *            'type' => Controls_Manager::HEADING,
+ *            'description' => __( 'My Header', 'plugin-domain' ),
+ *            'separator' => 'before',
+ *        ]
  *    );
  *
  * @since 1.0.0
@@ -47,7 +48,7 @@ class Control_Heading extends Base_UI_Control {
 	/**
 	 * Retrieve heading control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -62,7 +63,7 @@ class Control_Heading extends Base_UI_Control {
 	 * Get the default settings of the heading control. Used to return the
 	 * default settings while initializing the heading control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -80,12 +81,12 @@ class Control_Heading extends Base_UI_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<h3 class="elementor-control-title">{{ data.label }}</h3>
+        <h3 class="elementor-control-title">{{ data.label }}</h3>
 		<?php
 	}
 }

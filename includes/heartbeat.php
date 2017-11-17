@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,7 +12,7 @@ class Heartbeat {
 	 * Handle the post lock in the editor.
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @param array $response
 	 * @param array $data
@@ -31,6 +32,7 @@ class Heartbeat {
 
 			$response['elementorNonce'] = Plugin::$instance->editor->create_nonce();
 		}
+
 		return $response;
 	}
 
@@ -52,7 +54,7 @@ class Heartbeat {
 	 * Heartbeat constructor.
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	public function __construct() {
 		add_filter( 'heartbeat_received', [ $this, 'heartbeat_received' ], 10, 2 );

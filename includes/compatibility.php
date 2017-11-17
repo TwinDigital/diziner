@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 use Elementor\TemplateLibrary\Source_Local;
@@ -11,9 +12,9 @@ class Compatibility {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function register_actions() {
 		add_action( 'init', [ __CLASS__, 'init' ] );
 
@@ -25,9 +26,9 @@ class Compatibility {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function init() {
 		// Hotfix for NextGEN Gallery plugin.
 		if ( defined( 'NGG_PLUGIN_VERSION' ) ) {
@@ -105,7 +106,10 @@ class Compatibility {
 				$pum_admin_instance = \PUM_Admin_Shortcode_UI::instance();
 
 				remove_action( 'print_media_templates', [ $pum_admin_instance, 'print_media_templates' ] );
-				remove_action( 'admin_print_footer_scripts', [ $pum_admin_instance, 'admin_print_footer_scripts' ], 100 );
+				remove_action( 'admin_print_footer_scripts', [
+					$pum_admin_instance,
+					'admin_print_footer_scripts',
+				], 100 );
 				remove_action( 'wp_ajax_pum_do_shortcode', [ $pum_admin_instance, 'wp_ajax_pum_do_shortcode' ] );
 
 				remove_action( 'admin_enqueue_scripts', [ $pum_admin_instance, 'admin_enqueue_scripts' ] );
@@ -129,14 +133,14 @@ class Compatibility {
 		}
 
 		// Copy elementor data while polylang creates a translation copy
-		add_filter( 'pll_copy_post_metas', [ __CLASS__, 'save_polylang_meta' ], 10 , 4 );
+		add_filter( 'pll_copy_post_metas', [ __CLASS__, 'save_polylang_meta' ], 10, 4 );
 	}
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
-	*/
+	 */
 	public static function save_polylang_meta( $keys, $sync, $from, $to ) {
 		// Copy only for a new post.
 		if ( ! $sync ) {
@@ -151,8 +155,9 @@ class Compatibility {
 	 * We need the `wp_slash` in order to avoid the unslashing during the `add_post_meta`
 	 *
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @param array $post_meta
 	 *
 	 * @return array
@@ -173,8 +178,9 @@ class Compatibility {
 	 * We need the `wp_slash` in order to avoid the unslashing during the `add_post_meta`
 	 *
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @param array $post_meta
 	 *
 	 * @return array

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,16 +20,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  *                            field. Default is empty.
  * @param string $placeholder Optional. The field placeholder that appears when
  *                            the field has no values. Default is empty.
- * @param array $default      {
- *     Optional. Defautl text shadow values.
+ * @param array  $default     {
+ *                            Optional. Defautl text shadow values.
  *
- *     @type int    $horizontal Optional. Horizontal shadow. Default is 0.
- *     @type int    $vertical   Optional. Vertical shadow. Default is 0.
- *     @type int    $blur       Optional. Shadow blur. Default is 10.
- *     @type string $color      Optional. Shadow color. Available values are
+ * @type int     $horizontal  Optional. Horizontal shadow. Default is 0.
+ * @type int     $vertical    Optional. Vertical shadow. Default is 0.
+ * @type int     $blur        Optional. Shadow blur. Default is 10.
+ * @type string  $color       Optional. Shadow color. Available values are
  *                              `rgb`, `rgba`, `hex` or `format`. Default is
  *                              `rgba(0,0,0,0.3)`.
  * }
+ *
  * @param string $separator   Optional. Set the position of the control separator.
  *                            Available values are 'default', 'before', 'after'
  *                            and 'none'. 'default' will position the separator
@@ -44,10 +46,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array {
  *     Text shadow values.
  *
- *     @type int    $horizontal Horizontal shadow.
- *     @type int    $vertical   Vertical shadow.
- *     @type int    $blur       Shadow blur.
- *     @type string $color      Shadow color.
+ * @type int     $horizontal  Horizontal shadow.
+ * @type int     $vertical    Vertical shadow.
+ * @type int     $blur        Shadow blur.
+ * @type string  $color       Shadow color.
  * }
  */
 class Control_Text_Shadow extends Control_Base_Multiple {
@@ -55,7 +57,7 @@ class Control_Text_Shadow extends Control_Base_Multiple {
 	/**
 	 * Retrieve text shadow control type.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -70,7 +72,7 @@ class Control_Text_Shadow extends Control_Base_Multiple {
 	 * Get the default value of the text shadow control. Used to return the
 	 * default values while initializing the text shadow control.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 *
 	 * @return array Control default value.
@@ -90,7 +92,7 @@ class Control_Text_Shadow extends Control_Base_Multiple {
 	 * Get the sliders of the text shadow control. Sliders are used while
 	 * rendering the control output in the editor.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 *
 	 * @return array Control sliders.
@@ -104,12 +106,12 @@ class Control_Text_Shadow extends Control_Base_Multiple {
 			],
 			'horizontal' => [
 				'label' => __( 'Horizontal', 'elementor' ),
-				'min' => -100,
+				'min' => - 100,
 				'max' => 100,
 			],
 			'vertical' => [
 				'label' => __( 'Vertical', 'elementor' ),
-				'min' => -100,
+				'min' => - 100,
 				'max' => 100,
 			],
 		];
@@ -122,20 +124,20 @@ class Control_Text_Shadow extends Control_Base_Multiple {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<#
-		var defaultColorValue = '';
+        <#
+                var defaultColorValue = '';
 
-		if ( data.default.color ) {
-			if ( '#' !== data.default.color.substring( 0, 1 ) ) {
-				defaultColorValue = '#' + data.default.color;
-			} else {
-				defaultColorValue = data.default.color;
-			}
+                if ( data.default.color ) {
+                if ( '#' !== data.default.color.substring( 0, 1 ) ) {
+                defaultColorValue = '#' + data.default.color;
+                } else {
+                defaultColorValue = data.default.color;
+                }
 
 			defaultColorValue = ' data-default-color=' + defaultColorValue; // Quotes added automatically.
 		}
@@ -150,15 +152,17 @@ class Control_Text_Shadow extends Control_Base_Multiple {
 		foreach ( $this->get_sliders() as $slider_name => $slider ) :
 			$control_uid = $this->get_control_uid( $slider_name );
 			?>
-			<div class="elementor-shadow-slider">
-				<label for="<?php echo $control_uid; ?>" class="elementor-control-title"><?php echo $slider['label']; ?></label>
-				<div class="elementor-control-input-wrapper">
-					<div class="elementor-slider" data-input="<?php echo $slider_name; ?>"></div>
-					<div class="elementor-slider-input">
-						<input id="<?php echo $control_uid; ?>" type="number" min="<?php echo $slider['min']; ?>" max="<?php echo $slider['max']; ?>" data-setting="<?php echo $slider_name; ?>"/>
-					</div>
-				</div>
-			</div>
+            <div class="elementor-shadow-slider">
+                <label for="<?php echo $control_uid; ?>"
+                       class="elementor-control-title"><?php echo $slider['label']; ?></label>
+                <div class="elementor-control-input-wrapper">
+                    <div class="elementor-slider" data-input="<?php echo $slider_name; ?>"></div>
+                    <div class="elementor-slider-input">
+                        <input id="<?php echo $control_uid; ?>" type="number" min="<?php echo $slider['min']; ?>"
+                               max="<?php echo $slider['max']; ?>" data-setting="<?php echo $slider_name; ?>"/>
+                    </div>
+                </div>
+            </div>
 		<?php endforeach; ?>
 		<?php
 	}

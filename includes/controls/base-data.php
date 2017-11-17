@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +22,7 @@ abstract class Base_Data_Control extends Base_Control {
 	 * Get the default value of the data control. Used to return the default
 	 * values while initializing the data control.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 *
 	 * @return string Control default value.
@@ -35,7 +36,7 @@ abstract class Base_Data_Control extends Base_Control {
 	 *
 	 * Get the value of the data control from a specific widget settings.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 *
 	 * @param array $control Control
@@ -61,7 +62,7 @@ abstract class Base_Data_Control extends Base_Control {
 	 * Get the style of the control. Used when adding CSS rules to the control
 	 * while extracting CSS from the `selectors` data argument.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 *
 	 * @param string $css_property  CSS property.
@@ -79,7 +80,7 @@ abstract class Base_Data_Control extends Base_Control {
 	 * Get the unique ID of the control. Used to set a uniq CSS ID for the
 	 * element.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
 	 *
 	 * @param string $input_type Input type. Default is 'default'.

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,15 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'price',
- *    	[
- *    		'label' => __( 'Price', 'plugin-domain' ),
- *    		'type' => Controls_Manager::NUMBER,
- *    		'default' => 10,
- *    		'min' => 5,
- *    		'min' => 100,
- *    		'step' => 5,
- *    	]
+ *        'price',
+ *        [
+ *            'label' => __( 'Price', 'plugin-domain' ),
+ *            'type' => Controls_Manager::NUMBER,
+ *            'default' => 10,
+ *            'min' => 5,
+ *            'min' => 100,
+ *            'step' => 5,
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -71,7 +72,7 @@ class Control_Number extends Base_Data_Control {
 	/**
 	 * Retrieve number control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -86,7 +87,7 @@ class Control_Number extends Base_Data_Control {
 	 * Get the default settings of the number control. Used to return the
 	 * default settings while initializing the number control.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -106,21 +107,23 @@ class Control_Number extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<input id="<?php echo $control_uid; ?>" type="number" min="{{ data.min }}" max="{{ data.max }}" step="{{ data.step }}" class="tooltip-target" data-tooltip="{{ data.title }}" title="{{ data.title }}" data-setting="{{ data.name }}" placeholder="{{ data.placeholder }}" />
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <input id="<?php echo $control_uid; ?>" type="number" min="{{ data.min }}" max="{{ data.max }}"
+                       step="{{ data.step }}" class="tooltip-target" data-tooltip="{{ data.title }}"
+                       title="{{ data.title }}" data-setting="{{ data.name }}" placeholder="{{ data.placeholder }}"/>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 }

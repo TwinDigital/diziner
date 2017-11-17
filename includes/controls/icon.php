@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,24 +17,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'icon',
- *    	[
- *    		'label' => __( 'Social Icon', 'plugin-domain' ),
- *    		'type' => Controls_Manager::ICON,
- *    		'include' => [
- *    			'fa fa-facebook',
- *    			'fa fa-flickr',
- *    			'fa fa-google-plus',
- *    			'fa fa-instagram',
- *    			'fa fa-linkedin',
- *    			'fa fa-pinterest',
- *    			'fa fa-reddit',
- *    			'fa fa-twitch',
- *    			'fa fa-twitter',
- *    			'fa fa-vimeo',
- *    			'fa fa-youtube',
- *    		],
- *    	]
+ *        'icon',
+ *        [
+ *            'label' => __( 'Social Icon', 'plugin-domain' ),
+ *            'type' => Controls_Manager::ICON,
+ *            'include' => [
+ *                'fa fa-facebook',
+ *                'fa fa-flickr',
+ *                'fa fa-google-plus',
+ *                'fa fa-instagram',
+ *                'fa fa-linkedin',
+ *                'fa fa-pinterest',
+ *                'fa fa-reddit',
+ *                'fa fa-twitch',
+ *                'fa fa-twitter',
+ *                'fa fa-vimeo',
+ *                'fa fa-youtube',
+ *            ],
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -75,7 +76,7 @@ class Control_Icon extends Base_Data_Control {
 	/**
 	 * Retrieve icon control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -89,7 +90,7 @@ class Control_Icon extends Base_Data_Control {
 	 *
 	 * Get all the available icons.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @static
 	 *
@@ -894,7 +895,7 @@ class Control_Icon extends Base_Data_Control {
 	 * Get the default settings of the icons control. Used to return the default
 	 * settings while initializing the icons control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -912,26 +913,27 @@ class Control_Icon extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<select id="<?php echo $control_uid; ?>" class="elementor-control-icon" data-setting="{{ data.name }}" data-placeholder="<?php _e( 'Select Icon', 'elementor' ); ?>">
-					<option value=""><?php _e( 'Select Icon', 'elementor' ); ?></option>
-					<# _.each( data.options, function( option_title, option_value ) { #>
-					<option value="{{ option_value }}">{{{ option_title }}}</option>
-					<# } ); #>
-				</select>
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{ data.description }}</div>
-		<# } #>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <select id="<?php echo $control_uid; ?>" class="elementor-control-icon" data-setting="{{ data.name }}"
+                        data-placeholder="<?php _e( 'Select Icon', 'elementor' ); ?>">
+                    <option value=""><?php _e( 'Select Icon', 'elementor' ); ?></option>
+                    <# _.each( data.options, function( option_title, option_value ) { #>
+                        <option value="{{ option_value }}">{{{ option_title }}}</option>
+                        <# } ); #>
+                </select>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{ data.description }}</div>
+            <# } #>
 		<?php
 	}
 }

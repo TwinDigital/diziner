@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 use Elementor\Core\Settings\Manager as SettingsManager;
@@ -119,6 +120,7 @@ class Editor {
 		// Setup default heartbeat options
 		add_filter( 'heartbeat_settings', function( $settings ) {
 			$settings['interval'] = 15;
+
 			return $settings;
 		} );
 
@@ -268,7 +270,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function enqueue_scripts() {
@@ -290,134 +292,53 @@ class Editor {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || defined( 'ELEMENTOR_TESTS' ) && ELEMENTOR_TESTS ) ? '' : '.min';
 
 		// Hack for waypoint with editor mode.
-		wp_register_script(
-			'elementor-waypoints',
-			ELEMENTOR_ASSETS_URL . 'lib/waypoints/waypoints-for-editor.js',
-			[
+		wp_register_script( 'elementor-waypoints', ELEMENTOR_ASSETS_URL . 'lib/waypoints/waypoints-for-editor.js', [
 				'jquery',
-			],
-			'4.0.2',
-			true
-		);
+			], '4.0.2', true );
 
-		wp_register_script(
-			'backbone-marionette',
-			ELEMENTOR_ASSETS_URL . 'lib/backbone/backbone.marionette' . $suffix . '.js',
-			[
+		wp_register_script( 'backbone-marionette', ELEMENTOR_ASSETS_URL . 'lib/backbone/backbone.marionette' . $suffix . '.js', [
 				'backbone',
-			],
-			'2.4.5',
-			true
-		);
+			], '2.4.5', true );
 
-		wp_register_script(
-			'backbone-radio',
-			ELEMENTOR_ASSETS_URL . 'lib/backbone/backbone.radio' . $suffix . '.js',
-			[
+		wp_register_script( 'backbone-radio', ELEMENTOR_ASSETS_URL . 'lib/backbone/backbone.radio' . $suffix . '.js', [
 				'backbone',
-			],
-			'1.0.4',
-			true
-		);
+			], '1.0.4', true );
 
-		wp_register_script(
-			'perfect-scrollbar',
-			ELEMENTOR_ASSETS_URL . 'lib/perfect-scrollbar/perfect-scrollbar.jquery' . $suffix . '.js',
-			[
+		wp_register_script( 'perfect-scrollbar', ELEMENTOR_ASSETS_URL . 'lib/perfect-scrollbar/perfect-scrollbar.jquery' . $suffix . '.js', [
 				'jquery',
-			],
-			'0.6.12',
-			true
-		);
+			], '0.6.12', true );
 
-		wp_register_script(
-			'jquery-easing',
-			ELEMENTOR_ASSETS_URL . 'lib/jquery-easing/jquery-easing' . $suffix . '.js',
-			[
+		wp_register_script( 'jquery-easing', ELEMENTOR_ASSETS_URL . 'lib/jquery-easing/jquery-easing' . $suffix . '.js', [
 				'jquery',
-			],
-			'1.3.2',
-			true
-		);
+			], '1.3.2', true );
 
-		wp_register_script(
-			'nprogress',
-			ELEMENTOR_ASSETS_URL . 'lib/nprogress/nprogress' . $suffix . '.js',
-			[],
-			'0.2.0',
-			true
-		);
+		wp_register_script( 'nprogress', ELEMENTOR_ASSETS_URL . 'lib/nprogress/nprogress' . $suffix . '.js', [], '0.2.0', true );
 
-		wp_register_script(
-			'tipsy',
-			ELEMENTOR_ASSETS_URL . 'lib/tipsy/tipsy' . $suffix . '.js',
-			[
+		wp_register_script( 'tipsy', ELEMENTOR_ASSETS_URL . 'lib/tipsy/tipsy' . $suffix . '.js', [
 				'jquery',
-			],
-			'1.0.0',
-			true
-		);
+			], '1.0.0', true );
 
-		wp_register_script(
-			'jquery-select2',
-			ELEMENTOR_ASSETS_URL . 'lib/select2/js/select2' . $suffix . '.js',
-			[
+		wp_register_script( 'jquery-select2', ELEMENTOR_ASSETS_URL . 'lib/select2/js/select2' . $suffix . '.js', [
 				'jquery',
-			],
-			'4.0.2',
-			true
-		);
+			], '4.0.2', true );
 
-		wp_register_script(
-			'jquery-simple-dtpicker',
-			ELEMENTOR_ASSETS_URL . 'lib/jquery-simple-dtpicker/jquery.simple-dtpicker' . $suffix . '.js',
-			[
+		wp_register_script( 'jquery-simple-dtpicker', ELEMENTOR_ASSETS_URL . 'lib/jquery-simple-dtpicker/jquery.simple-dtpicker' . $suffix . '.js', [
 				'jquery',
-			],
-			'1.12.0',
-			true
-		);
+			], '1.12.0', true );
 
-		wp_register_script(
-			'ace',
-			'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js',
-			[],
-			'1.2.5',
-			true
-		);
+		wp_register_script( 'ace', 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js', [], '1.2.5', true );
 
-		wp_register_script(
-			'ace-language-tools',
-			'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ext-language_tools.js',
-			[
+		wp_register_script( 'ace-language-tools', 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ext-language_tools.js', [
 				'ace',
-			],
-			'1.2.5',
-			true
-		);
+			], '1.2.5', true );
 
-		wp_register_script(
-			'jquery-hover-intent',
-			ELEMENTOR_ASSETS_URL . 'lib/jquery-hover-intent/jquery-hover-intent' . $suffix . '.js',
-			[],
-			'1.0.0',
-			true
-		);
+		wp_register_script( 'jquery-hover-intent', ELEMENTOR_ASSETS_URL . 'lib/jquery-hover-intent/jquery-hover-intent' . $suffix . '.js', [], '1.0.0', true );
 
-		wp_register_script(
-			'elementor-dialog',
-			ELEMENTOR_ASSETS_URL . 'lib/dialog/dialog' . $suffix . '.js',
-			[
+		wp_register_script( 'elementor-dialog', ELEMENTOR_ASSETS_URL . 'lib/dialog/dialog' . $suffix . '.js', [
 				'jquery-ui-position',
-			],
-			'3.2.5',
-			true
-		);
+			], '3.2.5', true );
 
-		wp_register_script(
-			'elementor-editor',
-			ELEMENTOR_ASSETS_URL . 'js/editor' . $suffix . '.js',
-			[
+		wp_register_script( 'elementor-editor', ELEMENTOR_ASSETS_URL . 'js/editor' . $suffix . '.js', [
 				'wp-auth-check',
 				'jquery-ui-sortable',
 				'jquery-ui-resizable',
@@ -434,10 +355,7 @@ class Editor {
 				'ace',
 				'ace-language-tools',
 				'jquery-hover-intent',
-			],
-			ELEMENTOR_VERSION,
-			true
-		);
+			], ELEMENTOR_VERSION, true );
 
 		do_action( 'elementor/editor/before_enqueue_scripts' );
 
@@ -579,7 +497,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function enqueue_styles() {
@@ -589,54 +507,24 @@ class Editor {
 
 		$direction_suffix = is_rtl() ? '-rtl' : '';
 
-		wp_register_style(
-			'font-awesome',
-			ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/font-awesome' . $suffix . '.css',
-			[],
-			'4.7.0'
-		);
+		wp_register_style( 'font-awesome', ELEMENTOR_ASSETS_URL . 'lib/font-awesome/css/font-awesome' . $suffix . '.css', [], '4.7.0' );
 
-		wp_register_style(
-			'select2',
-			ELEMENTOR_ASSETS_URL . 'lib/select2/css/select2' . $suffix . '.css',
-			[],
-			'4.0.2'
-		);
+		wp_register_style( 'select2', ELEMENTOR_ASSETS_URL . 'lib/select2/css/select2' . $suffix . '.css', [], '4.0.2' );
 
-		wp_register_style(
-			'elementor-icons',
-			ELEMENTOR_ASSETS_URL . 'lib/eicons/css/elementor-icons' . $suffix . '.css',
-			[],
-			ELEMENTOR_VERSION
-		);
+		wp_register_style( 'elementor-icons', ELEMENTOR_ASSETS_URL . 'lib/eicons/css/elementor-icons' . $suffix . '.css', [], ELEMENTOR_VERSION );
 
-		wp_register_style(
-			'google-font-roboto',
-			'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700',
-			[],
-			ELEMENTOR_VERSION
-		);
+		wp_register_style( 'google-font-roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700', [], ELEMENTOR_VERSION );
 
-		wp_register_style(
-			'jquery-simple-dtpicker',
-			ELEMENTOR_ASSETS_URL . 'lib/jquery-simple-dtpicker/jquery.simple-dtpicker' . $suffix . '.css',
-			[],
-			'1.12.0'
-		);
+		wp_register_style( 'jquery-simple-dtpicker', ELEMENTOR_ASSETS_URL . 'lib/jquery-simple-dtpicker/jquery.simple-dtpicker' . $suffix . '.css', [], '1.12.0' );
 
-		wp_register_style(
-			'elementor-editor',
-			ELEMENTOR_ASSETS_URL . 'css/editor' . $direction_suffix . $suffix . '.css',
-			[
+		wp_register_style( 'elementor-editor', ELEMENTOR_ASSETS_URL . 'css/editor' . $direction_suffix . $suffix . '.css', [
 				'font-awesome',
 				'select2',
 				'elementor-icons',
 				'wp-auth-check',
 				'google-font-roboto',
 				'jquery-simple-dtpicker',
-			],
-			ELEMENTOR_VERSION
-		);
+			], ELEMENTOR_VERSION );
 
 		wp_enqueue_style( 'elementor-editor' );
 
@@ -644,25 +532,22 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 */
 	protected function _get_wp_editor_config() {
 		ob_start();
-		wp_editor(
-			'%%EDITORCONTENT%%',
-			'elementorwpeditor',
-			[
+		wp_editor( '%%EDITORCONTENT%%', 'elementorwpeditor', [
 				'editor_class' => 'elementor-wp-editor',
 				'editor_height' => 250,
 				'drag_drop_upload' => true,
-			]
-		);
+			] );
+
 		return ob_get_clean();
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function editor_head_trigger() {
@@ -670,7 +555,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param string $template Can be either a link to template file or template HTML content.
@@ -689,7 +574,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function wp_footer() {
@@ -711,7 +596,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param bool $edit_mode
@@ -721,7 +606,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function __construct() {
@@ -730,7 +615,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.8.1
+	 * @since  1.8.1
 	 * @access public
 	 *
 	 * @return null|string
@@ -744,7 +629,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.8.1
+	 * @since  1.8.1
 	 * @access public
 	 *
 	 * @param string $nonce
@@ -756,7 +641,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.8.1
+	 * @since  1.8.1
 	 * @access public
 	 *
 	 * @return bool
@@ -766,7 +651,7 @@ class Editor {
 	}
 
 	/**
-	 * @since 1.7.0
+	 * @since  1.7.0
 	 * @access private
 	 */
 	private function init_editor_templates() {

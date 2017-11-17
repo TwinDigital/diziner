@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,61 +22,61 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'list',
- *    	[
- *    		'label' => __( 'Repeater List', 'plugin-domain' ),
- *    		'type' => Controls_Manager::REPEATER,
- *    		'default' => [
- *    			[
- *    				'list_title' => __( 'Title #1', 'plugin-domain' ),
- *    				'list_content' => __( 'Item content. Click the edit button to change this text.', 'plugin-domain' ),
- *    			],
- *    			[
- *    				'list_title' => __( 'Title #2', 'plugin-domain' ),
- *    				'list_content' => __( 'Item content. Click the edit button to change this text.', 'plugin-domain' ),
- *    			],
- *    		],
- *    		'fields' => [
- *    			[
- *    				'name' => 'list_title',
- *    				'label' => __( 'Title', 'plugin-domain' ),
- *    				'type' => Controls_Manager::TEXT,
- *    				'default' => __( 'List Title' , 'plugin-domain' ),
- *    				'label_block' => true,
- *    			],
- *    			[
- *    				'name' => 'list_content',
- *    				'label' => __( 'Content', 'plugin-domain' ),
- *    				'type' => Controls_Manager::WYSIWYG,
- *    				'default' => __( 'List Content' , 'plugin-domain' ),
- *    				'show_label' => false,
- *    			],
- *    		],
- *    		'title_field' => '{{{ list_title }}}',
- *    	]
+ *        'list',
+ *        [
+ *            'label' => __( 'Repeater List', 'plugin-domain' ),
+ *            'type' => Controls_Manager::REPEATER,
+ *            'default' => [
+ *                [
+ *                    'list_title' => __( 'Title #1', 'plugin-domain' ),
+ *                    'list_content' => __( 'Item content. Click the edit button to change this text.', 'plugin-domain' ),
+ *                ],
+ *                [
+ *                    'list_title' => __( 'Title #2', 'plugin-domain' ),
+ *                    'list_content' => __( 'Item content. Click the edit button to change this text.', 'plugin-domain' ),
+ *                ],
+ *            ],
+ *            'fields' => [
+ *                [
+ *                    'name' => 'list_title',
+ *                    'label' => __( 'Title', 'plugin-domain' ),
+ *                    'type' => Controls_Manager::TEXT,
+ *                    'default' => __( 'List Title' , 'plugin-domain' ),
+ *                    'label_block' => true,
+ *                ],
+ *                [
+ *                    'name' => 'list_content',
+ *                    'label' => __( 'Content', 'plugin-domain' ),
+ *                    'type' => Controls_Manager::WYSIWYG,
+ *                    'default' => __( 'List Content' , 'plugin-domain' ),
+ *                    'show_label' => false,
+ *                ],
+ *            ],
+ *            'title_field' => '{{{ list_title }}}',
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
  *
  *    $list = $this->get_settings( 'list' );
  *    if ( $list ) {
- *    	echo '<dl>';
- *    	foreach ( $list as $item ) {
- *    		echo '<dt>' . $item['list_title'] . '</dt>';
- *    		echo '<dd>' . $item['list_content'] . '</dd>';
- *    	}
- *    	echo '</dl>';
+ *        echo '<dl>';
+ *        foreach ( $list as $item ) {
+ *            echo '<dt>' . $item['list_title'] . '</dt>';
+ *            echo '<dd>' . $item['list_content'] . '</dd>';
+ *        }
+ *        echo '</dl>';
  *    }
  *
  * JS usage (inside `Widget_Base::_content_template()` method):
  *
  *    <# if ( settings.list ) { #>
- *    	<dl>
- *    	<# _.each( settings.list, function( item ) { #>
- *    		<dt> {{ item.tab_title }} </dt>
- *    		<dd> {{ item.list_content }} </dd>
- *    	<# }); #>
- *    	</dl>
+ *        <dl>
+ *        <# _.each( settings.list, function( item ) { #>
+ *            <dt> {{ item.tab_title }} </dt>
+ *            <dd> {{ item.list_content }} </dd>
+ *        <# }); #>
+ *        </dl>
  *    <# } #>
  *
  * @since 1.0.0
@@ -111,7 +112,7 @@ class Control_Repeater extends Base_Data_Control {
 	/**
 	 * Retrieve repeater control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -126,7 +127,7 @@ class Control_Repeater extends Base_Data_Control {
 	 * Get the default settings of the repeater control. Used to return the
 	 * default settings while initializing the repeater control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -143,7 +144,7 @@ class Control_Repeater extends Base_Data_Control {
 	 *
 	 * Get the value of the repeater control from a specific widget.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param array $control Control
@@ -168,6 +169,7 @@ class Control_Repeater extends Base_Data_Control {
 				}
 			}
 		}
+
 		return $value;
 	}
 
@@ -177,7 +179,7 @@ class Control_Repeater extends Base_Data_Control {
 	 * Used as a wrapper method for inner controls while importing Elementor
 	 * template JSON file, and replacing the old data.
 	 *
-	 * @since 1.8.0
+	 * @since  1.8.0
 	 * @access public
 	 *
 	 * @param array $settings     Control settings.
@@ -220,20 +222,20 @@ class Control_Repeater extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<label>
-			<span class="elementor-control-title">{{{ data.label }}}</span>
-		</label>
-		<div class="elementor-repeater-fields"></div>
-		<div class="elementor-button-wrapper">
-			<button class="elementor-button elementor-button-default elementor-repeater-add" type="button">
-				<span class="eicon-plus"></span><?php _e( 'Add Item', 'elementor' ); ?>
-			</button>
-		</div>
+        <label>
+            <span class="elementor-control-title">{{{ data.label }}}</span>
+        </label>
+        <div class="elementor-repeater-fields"></div>
+        <div class="elementor-button-wrapper">
+            <button class="elementor-button elementor-button-default elementor-repeater-add" type="button">
+                <span class="eicon-plus"></span><?php _e( 'Add Item', 'elementor' ); ?>
+            </button>
+        </div>
 		<?php
 	}
 }

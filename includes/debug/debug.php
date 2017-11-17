@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\Debug;
 
 use Elementor\System_Info\Main;
@@ -10,9 +11,9 @@ class Debug {
 	const REPORT_NAME = 'debug';
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function debug_log() {
 		if ( empty( $_POST['data'] ) ) {
 			return;
@@ -61,7 +62,7 @@ class Debug {
 				if ( empty( $last_error['times'] ) ) {
 					$last_error['times'] = 2;
 				} else {
-					$last_error['times']++;
+					$last_error['times'] ++;
 				}
 
 				$last_error['timestamp'] = $error['timestamp'];
@@ -73,29 +74,27 @@ class Debug {
 		}
 
 		if ( self::MAX_LOGS_TO_SAVE && self::MAX_LOGS_TO_SAVE < count( $log ) ) {
-			$log = array_splice( $log, -self::MAX_LOGS_TO_SAVE );
+			$log = array_splice( $log, - self::MAX_LOGS_TO_SAVE );
 		}
 
 		update_option( self::OPTION_NAME, $log );
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access private
-	*/
+	 */
 	private function add_system_info_report() {
-		Main::add_report(
-			self::REPORT_NAME, [
+		Main::add_report( self::REPORT_NAME, [
 				'file_name' => __DIR__ . '/' . 'debug-reporter.php',
 				'class_name' => __NAMESPACE__ . '\Debug_Reporter',
-			]
-		);
+			] );
 	}
 
 	/**
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		add_action( 'wp_ajax_elementor_debug_log', [ $this, 'debug_log' ] );
 

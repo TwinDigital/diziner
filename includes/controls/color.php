@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,18 +18,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'title_color',
- *    	[
- *    		'label' => __( 'Title Color', 'plugin-domain' ),
- *    		'type' => Controls_Manager::COLOR,
- *    		'scheme' => [
- *    			'type' => Scheme_Color::get_type(),
- *    			'value' => Scheme_Color::COLOR_1,
- *    		],
- *    		'selectors' => [
- *    			'{{WRAPPER}} .title' => 'color: {{VALUE}}',
- *    		],
- *    	]
+ *        'title_color',
+ *        [
+ *            'label' => __( 'Title Color', 'plugin-domain' ),
+ *            'type' => Controls_Manager::COLOR,
+ *            'scheme' => [
+ *                'type' => Scheme_Color::get_type(),
+ *                'value' => Scheme_Color::COLOR_1,
+ *            ],
+ *            'selectors' => [
+ *                '{{WRAPPER}} .title' => 'color: {{VALUE}}',
+ *            ],
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -68,7 +69,7 @@ class Control_Color extends Base_Data_Control {
 	/**
 	 * Retrieve color control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -83,21 +84,15 @@ class Control_Color extends Base_Data_Control {
 	 * Used to register and enqueue custom scripts and styles used by the color
 	 * control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function enqueue() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_register_script(
-			'wp-color-picker-alpha',
-			ELEMENTOR_ASSETS_URL . 'lib/wp-color-picker/wp-color-picker-alpha' . $suffix . '.js',
-			[
+		wp_register_script( 'wp-color-picker-alpha', ELEMENTOR_ASSETS_URL . 'lib/wp-color-picker/wp-color-picker-alpha' . $suffix . '.js', [
 				'wp-color-picker',
-			],
-			'1.1',
-			true
-		);
+			], '1.1', true );
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker-alpha' );
@@ -110,7 +105,7 @@ class Control_Color extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
@@ -149,7 +144,7 @@ class Control_Color extends Base_Data_Control {
 	 * Get the default settings of the color control. Used to return the default
 	 * settings while initializing the color control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

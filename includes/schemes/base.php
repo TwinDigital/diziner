@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,24 +14,24 @@ abstract class Scheme_Base implements Scheme_Interface {
 
 	/**
 	 * @abstract
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	abstract protected function _init_system_schemes();
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_description() {
 		return '';
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	final public function get_system_schemes() {
 		if ( null === $this->_system_schemes ) {
 			$this->_system_schemes = $this->_init_system_schemes();
@@ -40,9 +41,9 @@ abstract class Scheme_Base implements Scheme_Interface {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_scheme_value() {
 		$scheme_value = get_option( 'elementor_scheme_' . static::get_type() );
 
@@ -56,9 +57,9 @@ abstract class Scheme_Base implements Scheme_Interface {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function save_scheme( array $posted ) {
 		$scheme_value = $this->get_scheme_value();
 
@@ -68,9 +69,9 @@ abstract class Scheme_Base implements Scheme_Interface {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_scheme() {
 		$scheme = [];
 
@@ -87,29 +88,30 @@ abstract class Scheme_Base implements Scheme_Interface {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	final public function print_template() {
 		?>
-		<script type="text/template" id="tmpl-elementor-panel-schemes-<?php echo static::get_type(); ?>">
-			<div class="elementor-panel-scheme-buttons">
-				<div class="elementor-panel-scheme-button-wrapper elementor-panel-scheme-reset">
-					<button class="elementor-button">
-						<i class="fa fa-undo"></i><?php _e( 'Reset', 'elementor' ); ?>
-					</button>
-				</div>
-				<div class="elementor-panel-scheme-button-wrapper elementor-panel-scheme-discard">
-					<button class="elementor-button">
-						<i class="fa fa-times"></i><?php _e( 'Discard', 'elementor' ); ?>
-					</button>
-				</div>
-				<div class="elementor-panel-scheme-button-wrapper elementor-panel-scheme-save">
-					<button class="elementor-button elementor-button-success" disabled><?php _e( 'Apply', 'elementor' ); ?></button>
-				</div>
-			</div>
+        <script type="text/template" id="tmpl-elementor-panel-schemes-<?php echo static::get_type(); ?>">
+            <div class="elementor-panel-scheme-buttons">
+                <div class="elementor-panel-scheme-button-wrapper elementor-panel-scheme-reset">
+                    <button class="elementor-button">
+                        <i class="fa fa-undo"></i><?php _e( 'Reset', 'elementor' ); ?>
+                    </button>
+                </div>
+                <div class="elementor-panel-scheme-button-wrapper elementor-panel-scheme-discard">
+                    <button class="elementor-button">
+                        <i class="fa fa-times"></i><?php _e( 'Discard', 'elementor' ); ?>
+                    </button>
+                </div>
+                <div class="elementor-panel-scheme-button-wrapper elementor-panel-scheme-save">
+                    <button class="elementor-button elementor-button-success"
+                            disabled><?php _e( 'Apply', 'elementor' ); ?></button>
+                </div>
+            </div>
 			<?php $this->print_template_content(); ?>
-		</script>
+        </script>
 		<?php
 	}
 }

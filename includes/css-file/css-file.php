@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -47,14 +48,14 @@ abstract class CSS_File {
 
 	/**
 	 * @abstract
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
-	*/
+	 */
 	abstract public function get_name();
 
 	/**
 	 * CSS_File constructor.
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
 	 */
 	public function __construct() {
@@ -64,9 +65,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
-	*/
+	 */
 	public function update() {
 		$this->parse_css();
 
@@ -100,9 +101,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
-	*/
+	 */
 	public function delete() {
 		if ( file_exists( $this->path ) ) {
 			unlink( $this->path );
@@ -110,9 +111,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
-	*/
+	 */
 	public function enqueue() {
 		$handle_id = $this->get_file_handle_id();
 
@@ -141,7 +142,7 @@ abstract class CSS_File {
 			if ( wp_styles()->query( $dep, 'done' ) ) {
 				echo '<style>' . $this->get_css() . '</style>'; // XSS ok.
 			} else {
-				wp_add_inline_style( $dep , $meta['css'] );
+				wp_add_inline_style( $dep, $meta['css'] );
 			}
 		} else {
 			wp_enqueue_style( $this->get_file_handle_id(), $this->url, $this->get_enqueue_dependencies(), $meta['time'] );
@@ -156,8 +157,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
+	 *
 	 * @param array    $control
 	 * @param array    $controls_stack
 	 * @param callable $value_callback
@@ -173,38 +175,36 @@ abstract class CSS_File {
 
 		foreach ( $control['selectors'] as $selector => $css_property ) {
 			try {
-				$output_css_property = preg_replace_callback(
-					'/\{\{(?:([^.}]+)\.)?([^}]*)}}/', function( $matches ) use ( $control, $value_callback, $controls_stack, $value, $css_property ) {
-						$parser_control = $control;
+				$output_css_property = preg_replace_callback( '/\{\{(?:([^.}]+)\.)?([^}]*)}}/', function( $matches ) use ( $control, $value_callback, $controls_stack, $value, $css_property ) {
+					$parser_control = $control;
 
-						$value_to_insert = $value;
+					$value_to_insert = $value;
 
-						if ( ! empty( $matches[1] ) ) {
-							if ( ! isset( $controls_stack[ $matches[1] ] ) ) {
-								return '';
-							}
-
-							$parser_control = $controls_stack[ $matches[1] ];
-
-							$value_to_insert = call_user_func( $value_callback, $parser_control );
+					if ( ! empty( $matches[1] ) ) {
+						if ( ! isset( $controls_stack[ $matches[1] ] ) ) {
+							return '';
 						}
 
-						if ( Controls_Manager::FONT === $control['type'] ) {
-							$this->fonts[] = $value_to_insert;
-						}
+						$parser_control = $controls_stack[ $matches[1] ];
 
-						/** @var Base_Data_Control $control_obj */
-						$control_obj = Plugin::$instance->controls_manager->get_control( $parser_control['type'] );
+						$value_to_insert = call_user_func( $value_callback, $parser_control );
+					}
 
-						$parsed_value = $control_obj->get_style_value( strtolower( $matches[2] ), $value_to_insert );
+					if ( Controls_Manager::FONT === $control['type'] ) {
+						$this->fonts[] = $value_to_insert;
+					}
 
-						if ( '' === $parsed_value ) {
-							throw new \Exception();
-						}
+					/** @var Base_Data_Control $control_obj */
+					$control_obj = Plugin::$instance->controls_manager->get_control( $parser_control['type'] );
 
-						return $parsed_value;
-					}, $css_property
-				);
+					$parsed_value = $control_obj->get_style_value( strtolower( $matches[2] ), $value_to_insert );
+
+					if ( '' === $parsed_value ) {
+						throw new \Exception();
+					}
+
+					return $parsed_value;
+				}, $css_property );
 			} catch ( \Exception $e ) {
 				return;
 			}
@@ -254,7 +254,7 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
 	 * @return string
 	 */
@@ -267,7 +267,7 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
 	 * @return Stylesheet
 	 */
@@ -276,9 +276,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access public
-	*/
+	 */
 	public function get_meta( $property = null ) {
 		$defaults = [
 			'status' => '',
@@ -295,8 +295,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
+	 *
 	 * @param Controls_Stack $controls_stack
 	 * @param array          $controls
 	 * @param array          $values
@@ -307,13 +308,7 @@ abstract class CSS_File {
 		foreach ( $controls as $control ) {
 			if ( ! empty( $control['style_fields'] ) ) {
 				foreach ( $values[ $control['name'] ] as $field_value ) {
-					$this->add_controls_stack_style_rules(
-						$controls_stack,
-						$control['style_fields'],
-						$field_value,
-						array_merge( $placeholders, [ '{{CURRENT_ITEM}}' ] ),
-						array_merge( $replacements, [ '.elementor-repeater-item-' . $field_value['_id'] ] )
-					);
+					$this->add_controls_stack_style_rules( $controls_stack, $control['style_fields'], $field_value, array_merge( $placeholders, [ '{{CURRENT_ITEM}}' ] ), array_merge( $replacements, [ '.elementor-repeater-item-' . $field_value['_id'] ] ) );
 				}
 			}
 
@@ -327,7 +322,7 @@ abstract class CSS_File {
 
 	/**
 	 * @abstract
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return array
 	 */
@@ -335,15 +330,16 @@ abstract class CSS_File {
 
 	/**
 	 * @abstract
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
+	 *
 	 * @param string $meta
 	 */
 	abstract protected function update_meta( $meta );
 
 	/**
 	 * @abstract
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return string
 	 */
@@ -351,21 +347,21 @@ abstract class CSS_File {
 
 	/**
 	 * @abstract
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
-	*/
+	 */
 	abstract protected function render_css();
 
 	/**
 	 * @abstract
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return string
 	 */
 	abstract protected function get_file_name();
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return array
 	 */
@@ -374,7 +370,7 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return string
 	 */
@@ -383,7 +379,7 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return bool
 	 */
@@ -392,8 +388,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
+	 *
 	 * @param array $control
 	 * @param array $values
 	 * @param array $controls_stack
@@ -401,16 +398,15 @@ abstract class CSS_File {
 	 * @param array $replacements
 	 */
 	private function add_control_style_rules( array $control, array $values, array $controls_stack, array $placeholders, array $replacements ) {
-		$this->add_control_rules(
-			$control, $controls_stack, function( $control ) use ( $values ) {
-				return $this->get_style_control_value( $control, $values );
-			}, $placeholders, $replacements
-		);
+		$this->add_control_rules( $control, $controls_stack, function( $control ) use ( $values ) {
+			return $this->get_style_control_value( $control, $values );
+		}, $placeholders, $replacements );
 	}
 
 	/**
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
+	 *
 	 * @param array $control
 	 * @param array $values
 	 *
@@ -431,24 +427,21 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access private
-	*/
+	 */
 	private function init_stylesheet() {
 		$this->stylesheet_obj = new Stylesheet();
 
 		$breakpoints = Responsive::get_breakpoints();
 
-		$this->stylesheet_obj
-			->add_device( 'mobile', 0 )
-			->add_device( 'tablet', $breakpoints['md'] )
-			->add_device( 'desktop', $breakpoints['lg'] );
+		$this->stylesheet_obj->add_device( 'mobile', 0 )->add_device( 'tablet', $breakpoints['md'] )->add_device( 'desktop', $breakpoints['lg'] );
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access private
-	*/
+	 */
 	private function set_path_and_url() {
 		$wp_upload_dir = wp_upload_dir( null, false );
 
@@ -460,9 +453,9 @@ abstract class CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access private
-	*/
+	 */
 	private function parse_css() {
 		$this->render_css();
 

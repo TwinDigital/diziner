@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 use Elementor\Core\Modules_Manager;
@@ -136,7 +137,7 @@ class Plugin {
 	public $beta_testers;
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @deprecated
 	 *
@@ -153,7 +154,7 @@ class Plugin {
 	 * object therefore, we don't want the object to be cloned.
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return void
 	 */
 	public function __clone() {
@@ -165,7 +166,7 @@ class Plugin {
 	 * Disable unserializing of the class
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @return void
 	 */
 	public function __wakeup() {
@@ -175,7 +176,7 @@ class Plugin {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 * @return Plugin
 	 */
@@ -190,7 +191,7 @@ class Plugin {
 
 	/**
 	 * Register the CPTs with our Editor support.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function init() {
@@ -202,9 +203,9 @@ class Plugin {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function init_components() {
 		Compatibility::register_actions();
 		SettingsManager::run();
@@ -244,9 +245,9 @@ class Plugin {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function add_cpt_support() {
 		$cpt_support = get_option( 'elementor_cpt_support', [ 'page', 'post' ] );
 
@@ -256,9 +257,9 @@ class Plugin {
 	}
 
 	/**
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
-	*/
+	 */
 	private function register_autoloader() {
 		require ELEMENTOR_PATH . '/includes/autoloader.php';
 
@@ -267,7 +268,7 @@ class Plugin {
 
 	/**
 	 * Plugin constructor.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
 	 */
 	private function __construct() {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'view',
- *    	[
- *    		'label' => __( 'View', 'plugin-domain' ),
- *    		'type' => Controls_Manager::HIDDEN,
- *    		'default' => 'traditional',
- *    	]
+ *        'view',
+ *        [
+ *            'label' => __( 'View', 'plugin-domain' ),
+ *            'type' => Controls_Manager::HIDDEN,
+ *            'default' => 'traditional',
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -44,7 +45,7 @@ class Control_Hidden extends Base_Data_Control {
 	/**
 	 * Retrieve hidden control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -60,12 +61,12 @@ class Control_Hidden extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<input type="hidden" data-setting="{{{ data.name }}}" />
+        <input type="hidden" data-setting="{{{ data.name }}}"/>
 		<?php
 	}
 }

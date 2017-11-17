@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\System_Info\Classes;
 
 use Elementor\System_Info\Classes\Abstracts\Base_Reporter;

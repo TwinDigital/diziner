@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,8 +16,9 @@ class Api {
 	 * This function notifies the user of upgrade notices, new templates and contributors
 	 *
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
+	 *
 	 * @param bool $force
 	 *
 	 * @return array|bool
@@ -61,9 +63,9 @@ class Api {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_upgrade_notice() {
 		$data = self::_get_info_data();
 		if ( empty( $data['upgrade_notice'] ) ) {
@@ -75,9 +77,9 @@ class Api {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_templates_data() {
 		self::_get_info_data();
 
@@ -91,9 +93,9 @@ class Api {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_template_content( $template_id ) {
 		$url = sprintf( self::$api_get_template_content_url, $template_id );
 
@@ -136,9 +138,9 @@ class Api {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function send_feedback( $feedback_key, $feedback_text ) {
 		return wp_remote_post( self::$api_feedback_url, [
 			'timeout' => 30,
@@ -153,9 +155,9 @@ class Api {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function ajax_reset_api_data() {
 		check_ajax_referer( 'elementor_reset_library', '_nonce' );
 
@@ -166,9 +168,9 @@ class Api {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function init() {
 		add_action( 'wp_ajax_elementor_reset_library', [ __CLASS__, 'ajax_reset_api_data' ] );
 	}

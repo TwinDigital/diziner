@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -96,7 +97,7 @@ class Group_Control_Image_Size extends Group_Control_Base {
 	 * @return string Image HTML.
 	 */
 	public static function get_attachment_image_html( $settings, $setting_key = 'image' ) {
-		$id  = $settings[ $setting_key ]['id'];
+		$id = $settings[ $setting_key ]['id'];
 
 		// Old version of image settings.
 		if ( ! isset( $settings[ $setting_key . '_size' ] ) ) {
@@ -125,7 +126,7 @@ class Group_Control_Image_Size extends Group_Control_Base {
 			$image_src = self::get_attachment_image_src( $id, $setting_key, $settings );
 
 			if ( ! $image_src && isset( $settings[ $setting_key ]['url'] ) ) {
-				$image_src = $settings[ $setting_key ]['url'] ;
+				$image_src = $settings[ $setting_key ]['url'];
 			}
 
 			if ( ! empty( $image_src ) ) {

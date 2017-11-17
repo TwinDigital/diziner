@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 use Elementor\Core\Settings\Manager as SettingsManager;
@@ -208,7 +209,7 @@ class Group_Control_Typography extends Group_Control_Base {
 			'type' => Controls_Manager::SLIDER,
 			'range' => [
 				'px' => [
-					'min' => -5,
+					'min' => - 5,
 					'max' => 10,
 					'step' => 0.1,
 				],
@@ -233,23 +234,21 @@ class Group_Control_Typography extends Group_Control_Base {
 	 * @return array Processed fields.
 	 */
 	protected function prepare_fields( $fields ) {
-		array_walk(
-			$fields, function( &$field, $field_name ) {
-				if ( 'typography' === $field_name ) {
-					return;
-				}
-
-				$selector_value = ! empty( $field['selector_value'] ) ? $field['selector_value'] : str_replace( '_', '-', $field_name ) . ': {{VALUE}};';
-
-				$field['selectors'] = [
-					'{{SELECTOR}}' => $selector_value,
-				];
-
-				$field['condition'] = [
-					'typography' => [ 'custom' ],
-				];
+		array_walk( $fields, function( &$field, $field_name ) {
+			if ( 'typography' === $field_name ) {
+				return;
 			}
-		);
+
+			$selector_value = ! empty( $field['selector_value'] ) ? $field['selector_value'] : str_replace( '_', '-', $field_name ) . ': {{VALUE}};';
+
+			$field['selectors'] = [
+				'{{SELECTOR}}' => $selector_value,
+			];
+
+			$field['condition'] = [
+				'typography' => [ 'custom' ],
+			];
+		} );
 
 		return parent::prepare_fields( $fields );
 	}

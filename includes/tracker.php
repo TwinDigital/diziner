@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +13,7 @@ class Tracker {
 	/**
 	 * Hook into cron event.
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public static function init() {
@@ -23,9 +24,9 @@ class Tracker {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function check_for_settings_optin( $new_value ) {
 		$old_value = get_option( 'elementor_allow_tracking', 'no' );
 		if ( $old_value !== $new_value && 'yes' === $new_value ) {
@@ -35,6 +36,7 @@ class Tracker {
 		if ( empty( $new_value ) ) {
 			$new_value = 'no';
 		}
+
 		return $new_value;
 	}
 
@@ -42,8 +44,9 @@ class Tracker {
 	 * Decide whether to send tracking data or not.
 	 *
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @param bool $override
 	 */
 	public static function send_tracking_data( $override = false ) {
@@ -89,33 +92,30 @@ class Tracker {
 
 		add_filter( 'https_ssl_verify', '__return_false' );
 
-		$response = wp_safe_remote_post(
-			self::$_api_url,
-			[
+		$response = wp_safe_remote_post( self::$_api_url, [
 				'timeout' => 25,
 				'blocking' => false,
 				// 'sslverify' => false,
 				'body' => [
 					'data' => wp_json_encode( $params ),
 				],
-			]
-		);
+			] );
 	}
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function is_allow_track() {
 		return 'yes' === get_option( 'elementor_allow_tracking', 'no' );
 	}
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function handle_tracker_actions() {
 		if ( ! isset( $_GET['elementor_tracker'] ) ) {
 			return;
@@ -141,9 +141,9 @@ class Tracker {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function admin_notices() {
 		// Show tracker notice after 24 hours from installed time.
 		if ( self::_get_installed_time() > strtotime( '-24 hours' ) ) {
@@ -169,32 +169,38 @@ class Tracker {
 		$tracker_description_text = __( 'Love using Elementor? Become a super contributor by opting in to our anonymous plugin data collection and to our updates. We guarantee no sensitive data is collected.', 'elementor' );
 		$tracker_description_text = apply_filters( 'elementor/tracker/admin_description_text', $tracker_description_text );
 		?>
-		<div class="updated">
-			<p><?php echo esc_html( $tracker_description_text ); ?> <a href="https://go.elementor.com/usage-data-tracking/" target="_blank"><?php _e( 'Learn more.', 'elementor' ); ?></a></p>
-			<p><a href="<?php echo $optin_url; ?>" class="button-primary"><?php _e( 'Sure! I\'d love to help', 'elementor' ); ?></a>&nbsp;<a href="<?php echo $optout_url; ?>" class="button-secondary"><?php _e( 'No thanks', 'elementor' ); ?></a></p>
-		</div>
+        <div class="updated">
+            <p><?php echo esc_html( $tracker_description_text ); ?> <a
+                        href="https://go.elementor.com/usage-data-tracking/"
+                        target="_blank"><?php _e( 'Learn more.', 'elementor' ); ?></a></p>
+            <p><a href="<?php echo $optin_url; ?>"
+                  class="button-primary"><?php _e( 'Sure! I\'d love to help', 'elementor' ); ?></a>&nbsp;<a
+                        href="<?php echo $optout_url; ?>"
+                        class="button-secondary"><?php _e( 'No thanks', 'elementor' ); ?></a></p>
+        </div>
 		<?php
 	}
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private static function _get_installed_time() {
 		$installed_time = get_option( '_elementor_installed_time' );
 		if ( ! $installed_time ) {
 			$installed_time = time();
 			update_option( '_elementor_installed_time', $installed_time );
 		}
+
 		return $installed_time;
 	}
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private static function _get_system_reports_data() {
 		$reports = Plugin::$instance->system_info->load_reports( System_Info\Main::get_allowed_reports() );
 
@@ -205,6 +211,7 @@ class Tracker {
 				$system_reports[ $report_key ][ $sub_report_key ] = $sub_report_details['value'];
 			}
 		}
+
 		return $system_reports;
 	}
 
@@ -212,7 +219,7 @@ class Tracker {
 	 * Get the last time tracking data was sent.
 	 *
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
 	 * @return int|bool
 	 */
@@ -222,22 +229,20 @@ class Tracker {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private static function _get_posts_usage() {
 		global $wpdb;
 
 		$usage = [];
 
-		$results = $wpdb->get_results(
-			"SELECT `post_type`, `post_status`, COUNT(`ID`) `hits` 
+		$results = $wpdb->get_results( "SELECT `post_type`, `post_status`, COUNT(`ID`) `hits` 
 				FROM {$wpdb->posts} `p`
 				LEFT JOIN {$wpdb->postmeta} `pm` ON(`p`.`ID` = `pm`.`post_id`)
 				WHERE `post_type` != 'elementor_library'
 					AND `meta_key` = '_elementor_edit_mode' AND `meta_value` = 'builder'
-				GROUP BY `post_type`, `post_status`;"
-		);
+				GROUP BY `post_type`, `post_status`;" );
 
 		if ( $results ) {
 			foreach ( $results as $result ) {
@@ -251,22 +256,20 @@ class Tracker {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private static function _get_library_usage() {
 		global $wpdb;
 
 		$usage = [];
 
-		$results = $wpdb->get_results(
-			"SELECT `meta_value`, COUNT(`ID`) `hits` 
+		$results = $wpdb->get_results( "SELECT `meta_value`, COUNT(`ID`) `hits` 
 				FROM {$wpdb->posts} `p`
 				LEFT JOIN {$wpdb->postmeta} `pm` ON(`p`.`ID` = `pm`.`post_id`)
 				WHERE `post_type` = 'elementor_library'
 					AND `meta_key` = '_elementor_template_type'
-				GROUP BY `post_type`, `meta_value`;"
-		);
+				GROUP BY `post_type`, `meta_value`;" );
 
 		if ( $results ) {
 			foreach ( $results as $result ) {

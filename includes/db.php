@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,7 +26,7 @@ class DB {
 	 * Save builder method.
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @param int    $post_id
 	 * @param array  $posted
@@ -67,7 +68,7 @@ class DB {
 			] );
 
 			if ( $autosave_id ) {
-				update_metadata( 'post',  $autosave_id, '_elementor_data', $json_value );
+				update_metadata( 'post', $autosave_id, '_elementor_data', $json_value );
 			}
 		}
 
@@ -86,7 +87,7 @@ class DB {
 	 * Get & Parse the builder from DB.
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @param int    $post_id
 	 * @param string $status
@@ -104,9 +105,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _get_json_meta( $post_id, $key ) {
 		$meta = get_post_meta( $post_id, $key, true );
 
@@ -118,9 +119,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_plain_editor( $post_id, $status = self::STATUS_PUBLISH ) {
 		$data = $this->_get_json_meta( $post_id, '_elementor_data' );
 
@@ -140,9 +141,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _get_new_editor_from_wp_editor( $post_id ) {
 		$post = get_post( $post_id );
 
@@ -181,7 +182,7 @@ class DB {
 	 * Remove draft data from DB.
 	 *
 	 * @access public
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @param $post_id
 	 *
@@ -195,7 +196,7 @@ class DB {
 	 * Set whether the page is elementor page or not
 	 *
 	 * @access public
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 *
 	 * @param int  $post_id
 	 * @param bool $is_elementor
@@ -210,9 +211,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function _render_element_plain_content( $element_data ) {
 		if ( 'widget' === $element_data['elType'] ) {
 			/** @var Widget_Base $widget */
@@ -231,9 +232,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function _save_plain_text( $post_id ) {
 		ob_start();
 
@@ -257,19 +258,17 @@ class DB {
 		// Remove empty lines.
 		$plain_text = preg_replace( '/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/', "\n", $plain_text );
 
-		wp_update_post(
-			[
+		wp_update_post( [
 				'ID' => $post_id,
 				'post_content' => $plain_text,
-			]
-		);
+			] );
 	}
 
 	/**
 	 * Sanitize posted data.
 	 *
 	 * @access private
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 *
 	 * @param array $data
 	 *
@@ -294,9 +293,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function iterate_data( $data_container, $callback ) {
 		if ( isset( $data_container['elType'] ) ) {
 			if ( ! empty( $data_container['elements'] ) ) {
@@ -320,9 +319,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.1.0
+	 * @since  1.1.0
 	 * @access public
-	*/
+	 */
 	public function copy_elementor_meta( $from_post_id, $to_post_id ) {
 		$from_post_meta = get_post_meta( $from_post_id );
 
@@ -345,15 +344,15 @@ class DB {
 	}
 
 	/**
-	 * @since 1.0.10
+	 * @since  1.0.10
 	 * @access public
-	*/
+	 */
 	public function is_built_with_elementor( $post_id ) {
 		return ! ! get_post_meta( $post_id, '_elementor_edit_mode', true );
 	}
 
 	/**
-	 * @access public
+	 * @access     public
 	 * @deprecated 1.4.0
 	 */
 	public function has_elementor_in_post( $post_id ) {
@@ -361,13 +360,14 @@ class DB {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function switch_to_post( $post_id ) {
 		// If is already switched, or is the same post, return.
 		if ( get_the_ID() === $post_id ) {
 			$this->switched_post_data[] = false;
+
 			return;
 		}
 
@@ -381,9 +381,9 @@ class DB {
 	}
 
 	/**
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
-	*/
+	 */
 	public function restore_current_post() {
 		$data = array_pop( $this->switched_post_data );
 
@@ -395,6 +395,7 @@ class DB {
 		// It was switched from an empty global post, restore this state and unset the global post
 		if ( false === $data['original_id'] ) {
 			unset( $GLOBALS['post'] );
+
 			return;
 		}
 

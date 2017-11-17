@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,33 +15,33 @@ class Scheme_Color extends Scheme_Base {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_type() {
 		return 'color';
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_title() {
 		return __( 'Colors', 'elementor' );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_disabled_title() {
 		return __( 'Color Palettes', 'elementor' );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_scheme_titles() {
 		return [
 			self::COLOR_1 => __( 'Primary', 'elementor' ),
@@ -51,9 +52,9 @@ class Scheme_Color extends Scheme_Base {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_default_scheme() {
 		return [
 			self::COLOR_1 => '#6ec1e4',
@@ -64,48 +65,50 @@ class Scheme_Color extends Scheme_Base {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function print_template_content() {
 		?>
-		<div class="elementor-panel-scheme-content elementor-panel-box">
-			<div class="elementor-panel-heading">
-				<div class="elementor-panel-heading-title"><?php echo $this->_get_current_scheme_title(); ?></div>
-			</div>
+        <div class="elementor-panel-scheme-content elementor-panel-box">
+            <div class="elementor-panel-heading">
+                <div class="elementor-panel-heading-title"><?php echo $this->_get_current_scheme_title(); ?></div>
+            </div>
 			<?php
 			$description = static::get_description();
 
 			if ( $description ) :
 				?>
-				<div class="elementor-panel-scheme-description elementor-descriptor"><?php echo $description; ?></div>
+                <div class="elementor-panel-scheme-description elementor-descriptor"><?php echo $description; ?></div>
 			<?php endif; ?>
-			<div class="elementor-panel-scheme-items elementor-panel-box-content"></div>
-		</div>
-		<div class="elementor-panel-scheme-colors-more-palettes elementor-panel-box">
-			<div class="elementor-panel-heading">
-				<div class="elementor-panel-heading-title"><?php _e( 'More Palettes', 'elementor' ); ?></div>
-			</div>
-			<div class="elementor-panel-box-content">
+            <div class="elementor-panel-scheme-items elementor-panel-box-content"></div>
+        </div>
+        <div class="elementor-panel-scheme-colors-more-palettes elementor-panel-box">
+            <div class="elementor-panel-heading">
+                <div class="elementor-panel-heading-title"><?php _e( 'More Palettes', 'elementor' ); ?></div>
+            </div>
+            <div class="elementor-panel-box-content">
 				<?php foreach ( $this->_get_system_schemes_to_print() as $scheme_name => $scheme ) : ?>
-					<div class="elementor-panel-scheme-color-system-scheme" data-scheme-name="<?php echo $scheme_name; ?>">
-						<div class="elementor-panel-scheme-color-system-items">
+                    <div class="elementor-panel-scheme-color-system-scheme"
+                         data-scheme-name="<?php echo $scheme_name; ?>">
+                        <div class="elementor-panel-scheme-color-system-items">
 							<?php foreach ( $scheme['items'] as $color_value ) : ?>
-								<div class="elementor-panel-scheme-color-system-item" style="background-color: <?php echo esc_attr( $color_value ); ?>;"></div>
+                                <div class="elementor-panel-scheme-color-system-item"
+                                     style="background-color: <?php echo esc_attr( $color_value ); ?>;"></div>
 							<?php endforeach; ?>
-						</div>
-						<div class="elementor-title"><?php echo $scheme['title']; ?></div>
-					</div>
+                        </div>
+                        <div class="elementor-title"><?php echo $scheme['title']; ?></div>
+                    </div>
 				<?php endforeach; ?>
-			</div>
-		</div>
+            </div>
+        </div>
 		<?php
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _init_system_schemes() {
 		return [
 			'joker' => [
@@ -193,17 +196,17 @@ class Scheme_Color extends Scheme_Base {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _get_system_schemes_to_print() {
 		return $this->get_system_schemes();
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _get_current_scheme_title() {
 		return __( 'Color Palette', 'elementor' );
 	}

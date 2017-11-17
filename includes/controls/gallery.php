@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,25 +16,25 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'gallery',
- *    	[
- *    		'label' => __( 'Add Images', 'plugin-domain' ),
- *    		'type' => Controls_Manager::GALLERY,
- *    		'default' => [],
- *    	]
+ *        'gallery',
+ *        [
+ *            'label' => __( 'Add Images', 'plugin-domain' ),
+ *            'type' => Controls_Manager::GALLERY,
+ *            'default' => [],
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
  *
  *    $images = $this->get_settings( 'gallery' );
  *    foreach ( $images as $image ) {
- *    	echo '<img src="' . $image['url'] . '">';
+ *        echo '<img src="' . $image['url'] . '">';
  *    }
  *
  * JS usage (inside `Widget_Base::_content_template()` method):
  *
  *    <# _.each( settings.gallery, function( image ) { #>
- *    	<img src="{{ image.url }}">
+ *        <img src="{{ image.url }}">
  *    <# }); #>
  *
  * @since 1.0.0
@@ -44,14 +45,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *                            hover. Default is empty.
  * @param string $description Optional. The description that appears below the
  *                            field. Default is empty.
- * @param array $default      {
- *     Optional. Defautl gallery images. An array of images containing the image
- *     ID and URL: `[ [ 'id' => '', 'url' => '' ], [ 'id' => '', 'url' => '' ], ... ]`
- *     Default is an empty array.
+ * @param array  $default     {
+ *                            Optional. Defautl gallery images. An array of images containing the image
+ *                            ID and URL: `[ [ 'id' => '', 'url' => '' ], [ 'id' => '', 'url' => '' ], ... ]`
+ *                            Default is an empty array.
  *
- *     @type int    $id  Optional. Image id. Default is empty.
- *     @type string $url Optional. Image url. Default is empty.
+ * @type int     $id          Optional. Image id. Default is empty.
+ * @type string  $url         Optional. Image url. Default is empty.
  * }
+ *
  * @param string $separator   Optional. Set the position of the control separator.
  *                            Available values are 'default', 'before', 'after'
  *                            and 'none'. 'default' will position the separator
@@ -68,8 +70,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *     An array of arrays containing the ID and URL for each image:
  *     `[ [ 'id' => '', 'url' => '' ], [ 'id' => '', 'url' => '' ], ... ]`
  *
- *     @type int    $id  Media id.
- *     @type string $url Media url.
+ * @type int     $id          Media id.
+ * @type string  $url         Media url.
  * }
  */
 class Control_Gallery extends Base_Data_Control {
@@ -77,7 +79,7 @@ class Control_Gallery extends Base_Data_Control {
 	/**
 	 * Retrieve gallery control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -92,7 +94,7 @@ class Control_Gallery extends Base_Data_Control {
 	 * Used to import gallery control files from external sites while importing
 	 * Elementor template JSON file, and replacing the old data.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @param array $settings Control settings
@@ -121,36 +123,38 @@ class Control_Gallery extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<div class="elementor-control-field">
-			<div class="elementor-control-input-wrapper">
-				<# if ( data.description ) { #>
-				<div class="elementor-control-field-description">{{{ data.description }}}</div>
-				<# } #>
-				<div class="elementor-control-media">
-					<div class="elementor-control-gallery-status">
+        <div class="elementor-control-field">
+            <div class="elementor-control-input-wrapper">
+                <# if ( data.description ) { #>
+                    <div class="elementor-control-field-description">{{{ data.description }}}</div>
+                    <# } #>
+                        <div class="elementor-control-media">
+                            <div class="elementor-control-gallery-status">
 						<span class="elementor-control-gallery-status-title">
 							<# if ( data.controlValue.length ) {
-								print( elementor.translate( 'gallery_images_selected', [ data.controlValue.length ] ) );
-							} else { #>
+                                    print( elementor.translate( 'gallery_images_selected', [ data.controlValue.length ] ) );
+                                    } else { #>
 								<?php _e( 'No Images Selected', 'elementor' ); ?>
-							<# } #>
+                                <# } #>
 						</span>
-						<span class="elementor-control-gallery-clear">(<?php _e( 'Clear', 'elementor' ); ?>)</span>
-					</div>
-					<div class="elementor-control-gallery-thumbnails">
-						<# _.each( data.controlValue, function( image ) { #>
-							<div class="elementor-control-gallery-thumbnail" style="background-image: url({{ image.url }})"></div>
-						<# } ); #>
-					</div>
-					<button class="elementor-button elementor-control-gallery-add"><?php _e( '+ Add Images', 'elementor' ); ?></button>
-				</div>
-			</div>
-		</div>
+                                <span class="elementor-control-gallery-clear">(<?php _e( 'Clear', 'elementor' ); ?>
+                                    )</span>
+                            </div>
+                            <div class="elementor-control-gallery-thumbnails">
+                                <# _.each( data.controlValue, function( image ) { #>
+                                    <div class="elementor-control-gallery-thumbnail"
+                                         style="background-image: url({{ image.url }})"></div>
+                                    <# } ); #>
+                            </div>
+                            <button class="elementor-button elementor-control-gallery-add"><?php _e( '+ Add Images', 'elementor' ); ?></button>
+                        </div>
+            </div>
+        </div>
 		<?php
 	}
 
@@ -160,7 +164,7 @@ class Control_Gallery extends Base_Data_Control {
 	 * Get the default settings of the gallery control. Used to return the
 	 * default settings while initializing the gallery control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -178,7 +182,7 @@ class Control_Gallery extends Base_Data_Control {
 	 * Get the default value of the gallery control. Used to return the default
 	 * values while initializing the gallery control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array Control default value.

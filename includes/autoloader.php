@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -83,16 +84,16 @@ class Autoloader {
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
-	*/
+	 */
 	public static function run() {
 		spl_autoload_register( [ __CLASS__, 'autoload' ] );
 	}
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 * @return array
 	 */
@@ -102,20 +103,18 @@ class Autoloader {
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
-	*/
+	 */
 	private static function load_class( $relative_class_name ) {
 		if ( isset( self::$classes_map[ $relative_class_name ] ) ) {
 			$filename = ELEMENTOR_PATH . '/' . self::$classes_map[ $relative_class_name ];
 		} else {
-			$filename = strtolower(
-				preg_replace(
-					[ '/([a-z])([A-Z])/', '/_/', '/\\\/' ],
-					[ '$1-$2', '-', DIRECTORY_SEPARATOR ],
-					$relative_class_name
-				)
-			);
+			$filename = strtolower( preg_replace( [ '/([a-z])([A-Z])/', '/_/', '/\\\/' ], [
+						'$1-$2',
+						'-',
+						DIRECTORY_SEPARATOR,
+					], $relative_class_name ) );
 
 			$filename = ELEMENTOR_PATH . $filename . '.php';
 		}
@@ -127,9 +126,9 @@ class Autoloader {
 
 	/**
 	 * @static
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
-	*/
+	 */
 	private static function autoload( $class ) {
 		if ( 0 !== strpos( $class, __NAMESPACE__ . '\\' ) ) {
 			return;

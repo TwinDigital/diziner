@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -75,7 +76,7 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 
 				$element->add_responsive_control( $id, $field_args, $options );
 			} else {
-				$element->add_control( $id , $field_args, $options );
+				$element->add_control( $id, $field_args, $options );
 			}
 		}
 
@@ -150,6 +151,7 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 	}
 
 	// TODO: Temp - Make it abstract
+
 	/**
 	 * Init fields.
 	 *
@@ -343,17 +345,11 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 	private function add_conditions_prefix( $field ) {
 		$controls_prefix = $this->get_controls_prefix();
 
-		$prefixed_condition_keys = array_map(
-			function( $key ) use ( $controls_prefix ) {
-				return $controls_prefix . $key;
-			},
-			array_keys( $field['condition'] )
-		);
+		$prefixed_condition_keys = array_map( function( $key ) use ( $controls_prefix ) {
+			return $controls_prefix . $key;
+		}, array_keys( $field['condition'] ) );
 
-		$field['condition'] = array_combine(
-			$prefixed_condition_keys,
-			$field['condition']
-		);
+		$field['condition'] = array_combine( $prefixed_condition_keys, $field['condition'] );
 
 		return $field;
 	}
@@ -376,14 +372,9 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 	private function handle_selectors( $selectors ) {
 		$args = $this->get_args();
 
-		$selectors = array_combine(
-			array_map(
-				function( $key ) use ( $args ) {
-						return str_replace( '{{SELECTOR}}', $args['selector'], $key );
-				}, array_keys( $selectors )
-			),
-			$selectors
-		);
+		$selectors = array_combine( array_map( function( $key ) use ( $args ) {
+			return str_replace( '{{SELECTOR}}', $args['selector'], $key );
+		}, array_keys( $selectors ) ), $selectors );
 
 		if ( ! $selectors ) {
 			return $selectors;
@@ -392,11 +383,9 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 		$controls_prefix = $this->get_controls_prefix();
 
 		foreach ( $selectors as &$selector ) {
-			$selector = preg_replace_callback(
-				'/(?:\{\{)\K[^.}]+(?=\.[^}]*}})/', function( $matches ) use ( $controls_prefix ) {
-					return $controls_prefix . $matches[0];
-				}, $selector
-			);
+			$selector = preg_replace_callback( '/(?:\{\{)\K[^.}]+(?=\.[^}]*}})/', function( $matches ) use ( $controls_prefix ) {
+				return $controls_prefix . $matches[0];
+			}, $selector );
 		}
 
 		return $selectors;

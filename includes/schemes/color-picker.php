@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,49 +15,47 @@ class Scheme_Color_Picker extends Scheme_Color {
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_type() {
 		return 'color-picker';
 	}
 
 	/**
 	 * @static
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public static function get_description() {
 		return __( 'Choose which colors appear in the editor\'s color picker. This makes accessing the colors you chose for the site much easier.', 'elementor' );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_default_scheme() {
-		return array_replace(
-			parent::get_default_scheme(), [
+		return array_replace( parent::get_default_scheme(), [
 				self::COLOR_5 => '#4054b2',
 				self::COLOR_6 => '#23a455',
 				self::COLOR_7 => '#000',
 				self::COLOR_8 => '#fff',
-			]
-		);
+			] );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_scheme_titles() {
 		return [];
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _init_system_schemes() {
 		$schemes = parent::_init_system_schemes();
 
@@ -130,9 +129,9 @@ class Scheme_Color_Picker extends Scheme_Color {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _get_system_schemes_to_print() {
 		$schemes = $this->get_system_schemes();
 
@@ -155,9 +154,9 @@ class Scheme_Color_Picker extends Scheme_Color {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _get_current_scheme_title() {
 		return __( 'Color Picker', 'elementor' );
 	}

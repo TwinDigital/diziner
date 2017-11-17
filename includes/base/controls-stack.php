@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -110,7 +111,7 @@ abstract class Controls_Stack {
 	/**
 	 * Retrieve the name.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 * @abstract
 	 *
@@ -124,7 +125,7 @@ abstract class Controls_Stack {
 	 * Some classes need to use unique names, this method allows you to create them.
 	 * By default it returns the regular name.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 *
 	 * @return string Unique name.
@@ -136,7 +137,7 @@ abstract class Controls_Stack {
 	/**
 	 * Retrieve the generic ID.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return string The ID.
@@ -161,7 +162,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the type, e.g. 'stack', 'element', 'widget' etc.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 * @static
 	 *
@@ -178,7 +179,7 @@ abstract class Controls_Stack {
 	 * items that match the needle. If needle is not defined the entire haystack
 	 * will be returened.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access private
 	 * @static
 	 *
@@ -200,7 +201,7 @@ abstract class Controls_Stack {
 	 *
 	 * When inserting new controls, this method will return the current section.
 	 *
-	 * @since 1.7.1
+	 * @since  1.7.1
 	 * @access public
 	 *
 	 * @return null|array Current section.
@@ -214,7 +215,7 @@ abstract class Controls_Stack {
 	 *
 	 * When inserting new controls, this method will return the current tab.
 	 *
-	 * @since 1.7.1
+	 * @since  1.7.1
 	 * @access public
 	 *
 	 * @return null|array Current tab.
@@ -227,8 +228,8 @@ abstract class Controls_Stack {
 	 * Retrieve controls.
 	 *
 	 * Get all the controls or, when requested, a specific control.
- 	 *
-	 * @since 1.4.0
+	 *
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $control_id The ID of the requested control. Optional field,
@@ -254,7 +255,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get an array of all the active controls that meet the condition field.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return array Active controls.
@@ -264,17 +265,15 @@ abstract class Controls_Stack {
 
 		$settings = $this->get_controls_settings();
 
-		$active_controls = array_reduce(
-			array_keys( $controls ), function( $active_controls, $control_key ) use ( $controls, $settings ) {
-				$control = $controls[ $control_key ];
+		$active_controls = array_reduce( array_keys( $controls ), function( $active_controls, $control_key ) use ( $controls, $settings ) {
+			$control = $controls[ $control_key ];
 
-				if ( $this->is_control_visible( $control, $settings ) ) {
-					$active_controls[ $control_key ] = $control;
-				}
+			if ( $this->is_control_visible( $control, $settings ) ) {
+				$active_controls[ $control_key ] = $control;
+			}
 
-				return $active_controls;
-			}, []
-		);
+			return $active_controls;
+		}, [] );
 
 		return $active_controls;
 	}
@@ -284,7 +283,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the settings for all the controls that represent them.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 *
 	 * @return array Controls settings.
@@ -300,7 +299,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $id      Control ID.
@@ -322,10 +321,13 @@ abstract class Controls_Stack {
 		}
 
 		if ( $this->injection_point ) {
-			$options['index'] = $this->injection_point['index']++;
+			$options['index'] = $this->injection_point['index'] ++;
 		}
 
-		if ( empty( $args['type'] ) || ! in_array( $args['type'], [ Controls_Manager::SECTION, Controls_Manager::WP_WIDGET ] ) ) {
+		if ( empty( $args['type'] ) || ! in_array( $args['type'], [
+				Controls_Manager::SECTION,
+				Controls_Manager::WP_WIDGET,
+			] ) ) {
 			$target_section_args = $this->_current_section;
 
 			$target_tab = $this->_current_tab;
@@ -367,7 +369,7 @@ abstract class Controls_Stack {
 	 *
 	 * Unregister an existing control and remove it from the stack.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $control_id Control ID.
@@ -385,8 +387,8 @@ abstract class Controls_Stack {
 	 * control you set the `$args` parameter, this method allows you to update
 	 * the arguments by passing new data.
 	 *
-	 * @since 1.4.0
-	 * @since 1.8.1 New `$options` parameter added.
+	 * @since  1.4.0
+	 * @since  1.8.1 New `$options` parameter added.
 	 *
 	 * @access public
 	 *
@@ -424,19 +426,19 @@ abstract class Controls_Stack {
 	 *
 	 * Get the position while injecting data, based on the element type.
 	 *
-	 * @since 1.7.0
+	 * @since  1.7.0
 	 * @access public
 	 *
 	 * @param array $position {
-	 *     The injection position.
+	 *                        The injection position.
 	 *
-	 *     @type string $type Injection type, either `control` or `section`.
+	 * @type string $type     Injection type, either `control` or `section`.
 	 *                        Default is `control`.
-	 *     @type string $at   Where to inject. If `$type` is `control` accepts
+	 * @type string $at       Where to inject. If `$type` is `control` accepts
 	 *                        `before` and `after`. If `$type` is `section`
 	 *                        accepts `start` and `end`. Dafault values based on
 	 *                        the `type`.
-	 *     @type string $of   Control/Section ID.
+	 * @type string $of       Control/Section ID.
 	 * }
 	 *
 	 * @return bool|array Position info.
@@ -453,10 +455,10 @@ abstract class Controls_Stack {
 
 		$position = array_merge( $default_position, $position );
 
-		if (
-			'control' === $position['type'] && in_array( $position['at'], [ 'start', 'end' ] ) ||
-			'section' === $position['type'] && in_array( $position['at'], [ 'before', 'after' ] )
-		) {
+		if ( 'control' === $position['type'] && in_array( $position['at'], [
+				'start',
+				'end',
+			] ) || 'section' === $position['type'] && in_array( $position['at'], [ 'before', 'after' ] ) ) {
 			_doing_it_wrong( get_called_class() . '::' . __FUNCTION__, 'Invalid position arguments. Use `before` / `after` for control or `start` / `end` for section.', '1.7.0' );
 
 			return false;
@@ -475,15 +477,15 @@ abstract class Controls_Stack {
 		$controls_keys = array_keys( $registered_controls );
 
 		while ( Controls_Manager::SECTION !== $registered_controls[ $controls_keys[ $target_section_index ] ]['type'] ) {
-			$target_section_index--;
+			$target_section_index --;
 		}
 
 		if ( 'section' === $position['type'] ) {
-			$target_control_index++;
+			$target_control_index ++;
 
 			if ( 'end' === $position['at'] ) {
 				while ( Controls_Manager::SECTION !== $registered_controls[ $controls_keys[ $target_control_index ] ]['type'] ) {
-					if ( ++$target_control_index >= count( $registered_controls ) ) {
+					if ( ++ $target_control_index >= count( $registered_controls ) ) {
 						break;
 					}
 				}
@@ -493,7 +495,7 @@ abstract class Controls_Stack {
 		$target_control = $registered_controls[ $controls_keys[ $target_control_index ] ];
 
 		if ( 'after' === $position['at'] ) {
-			$target_control_index++;
+			$target_control_index ++;
 		}
 
 		$section_id = $registered_controls[ $controls_keys[ $target_section_index ] ]['name'];
@@ -516,7 +518,7 @@ abstract class Controls_Stack {
 	/**
 	 * Retrieve control index.
 	 *
-	 * @since 1.7.6
+	 * @since  1.7.6
 	 * @access public
 	 *
 	 * @param string $control_id
@@ -534,7 +536,7 @@ abstract class Controls_Stack {
 	/**
 	 * Retrieve all controls under a specific section
 	 *
-	 * @since 1.7.6
+	 * @since  1.7.6
 	 * @access public
 	 *
 	 * @param string $section_id
@@ -551,7 +553,7 @@ abstract class Controls_Stack {
 		$controls_keys = array_keys( $registered_controls );
 
 		while ( true ) {
-			$section_index++;
+			$section_index ++;
 
 			if ( ! isset( $controls_keys[ $section_index ] ) ) {
 				break;
@@ -576,19 +578,20 @@ abstract class Controls_Stack {
 	 * control. For example grouping together like typography controls into a
 	 * single, easy-to-use control.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $group_name Group control name.
 	 * @param array  $args       {
-	 *     Group control arguments. Default is an empty array.
+	 *                           Group control arguments. Default is an empty array.
 	 *
-	 *     @type string $name      Base Control name.
-	 *     @type string $selector  CSS Selector
-	 *     @type string $scheme    Globel scheme to be used.
-	 *     @type array  $condition Display control based on predefined conditional
+	 * @type string  $name       Base Control name.
+	 * @type string  $selector   CSS Selector
+	 * @type string  $scheme     Globel scheme to be used.
+	 * @type array   $condition  Display control based on predefined conditional
 	 *                             logic.
 	 * }
+	 *
 	 * @param array  $options    Group control options. Default is an empty array.
 	 */
 	final public function add_group_control( $group_name, array $args = [], array $options = [] ) {
@@ -606,7 +609,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get all the controls that use schemes.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return array Scheme controls.
@@ -614,11 +617,9 @@ abstract class Controls_Stack {
 	final public function get_scheme_controls() {
 		$enabled_schemes = Schemes_Manager::get_enabled_schemes();
 
-		return array_filter(
-			$this->get_controls(), function( $control ) use ( $enabled_schemes ) {
-				return ( ! empty( $control['scheme'] ) && in_array( $control['scheme']['type'], $enabled_schemes ) );
-			}
-		);
+		return array_filter( $this->get_controls(), function( $control ) use ( $enabled_schemes ) {
+			return ( ! empty( $control['scheme'] ) && in_array( $control['scheme']['type'], $enabled_schemes ) );
+		} );
 	}
 
 	/**
@@ -627,7 +628,7 @@ abstract class Controls_Stack {
 	 * Get style controls for all active controls or, when requested, from a
 	 * specific set of controls.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param array $controls Controls list. Default is null.
@@ -659,17 +660,15 @@ abstract class Controls_Stack {
 	 *
 	 * From all the active controls get the controls that use the same prefix class.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return array Class controls.
 	 */
 	final public function get_class_controls() {
-		return array_filter(
-			$this->get_active_controls(), function( $control ) {
-				return ( isset( $control['prefix_class'] ) );
-			}
-		);
+		return array_filter( $this->get_active_controls(), function( $control ) {
+			return ( isset( $control['prefix_class'] ) );
+		} );
 	}
 
 	/**
@@ -677,7 +676,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get all the tabs assigened to the control.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return array Tabs controls.
@@ -694,7 +693,7 @@ abstract class Controls_Stack {
 	 * Register a set of controls to allow editing based on user screen size.
 	 * This method registeres three screen sizes: Desktop, Tablet and Mobile.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $id      Responsive control ID.
@@ -776,7 +775,7 @@ abstract class Controls_Stack {
 	 * add new control you set the `$args` parameter, this method allows you to
 	 * update the arguments by passing new data.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $id      Responsive control ID.
@@ -792,7 +791,7 @@ abstract class Controls_Stack {
 	 *
 	 * Unregister an existing responsive control and remove it from the stack.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $id Responsive control ID.
@@ -816,7 +815,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the name of the current class.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return string Class name.
@@ -830,7 +829,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the config or, if non set, use the initial config.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return array|null The config.
@@ -848,7 +847,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get settings keys for all frontend controls.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 *
 	 * @return array Settings keys for each control.
@@ -869,8 +868,8 @@ abstract class Controls_Stack {
 	 * Retrieve the raw data.
 	 *
 	 * Get all the items or, when requested, a specific item.
- 	 *
-	 * @since 1.4.0
+	 *
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $item The requested item. Default is null.
@@ -885,8 +884,8 @@ abstract class Controls_Stack {
 	 * Retrieve the settings.
 	 *
 	 * Get all the settings or, when requested, a specific setting.
- 	 *
-	 * @since 1.4.0
+	 *
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $setting The requested setting. Default is null.
@@ -902,7 +901,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the settings from all the active controls.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @return array Active settings.
@@ -922,7 +921,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the settings for all frontend controls.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 *
 	 * @return array Frontend settings.
@@ -945,7 +944,7 @@ abstract class Controls_Stack {
 	 * Recieves controls, settings and a callback function to filter the settings by
 	 * and returns filtered settings.
 	 *
-	 * @since 1.5.0
+	 * @since  1.5.0
 	 * @access public
 	 *
 	 * @param callable $callback The callback function.
@@ -963,19 +962,17 @@ abstract class Controls_Stack {
 			$controls = $this->get_controls();
 		}
 
-		return array_reduce(
-			array_keys( $settings ), function( $filtered_settings, $setting_key ) use ( $controls, $settings, $callback ) {
-				if ( isset( $controls[ $setting_key ] ) ) {
-					$result = $callback( $settings[ $setting_key ], $controls[ $setting_key ] );
+		return array_reduce( array_keys( $settings ), function( $filtered_settings, $setting_key ) use ( $controls, $settings, $callback ) {
+			if ( isset( $controls[ $setting_key ] ) ) {
+				$result = $callback( $settings[ $setting_key ], $controls[ $setting_key ] );
 
-					if ( null !== $result ) {
-						$filtered_settings[ $setting_key ] = $result;
-					}
+				if ( null !== $result ) {
+					$filtered_settings[ $setting_key ] = $result;
 				}
+			}
 
-				return $filtered_settings;
-			}, []
-		);
+			return $filtered_settings;
+		}, [] );
 	}
 
 	/**
@@ -983,7 +980,7 @@ abstract class Controls_Stack {
 	 *
 	 * Used to determine whether the control is visible or not.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param array $control The control.
@@ -1056,7 +1053,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $section_id Section ID.
@@ -1092,7 +1089,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 */
 	public function end_controls_section() {
@@ -1122,7 +1119,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $tabs_id Tabs ID.
@@ -1132,12 +1129,9 @@ abstract class Controls_Stack {
 			wp_die( sprintf( 'Elementor: You can\'t start tabs before the end of the previous tabs: `%s`', $this->_current_tab['tabs_wrapper'] ) ); // XSS ok.
 		}
 
-		$this->add_control(
-			$tabs_id,
-			[
+		$this->add_control( $tabs_id, [
 				'type' => Controls_Manager::TABS,
-			]
-		);
+			] );
 
 		$this->_current_tab = [
 			'tabs_wrapper' => $tabs_id,
@@ -1156,7 +1150,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 */
 	public function end_controls_tabs() {
@@ -1173,7 +1167,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string $tab_id Tab ID.
@@ -1204,7 +1198,7 @@ abstract class Controls_Stack {
 	 *
 	 * This method should be used inside `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 */
 	public function end_controls_tab() {
@@ -1220,19 +1214,19 @@ abstract class Controls_Stack {
 	 * be injected to a specific position in the stack, until you stop the
 	 * injection using `end_injection()` method.
 	 *
-	 * @since 1.7.1
+	 * @since  1.7.1
 	 * @access public
 	 *
 	 * @param array $position {
-	 *     The position where to srart the injection.
+	 *                        The position where to srart the injection.
 	 *
-	 *     @type string $type Injection type, either `control` or `section`.
+	 * @type string $type     Injection type, either `control` or `section`.
 	 *                        Default is `control`.
-	 *     @type string $at   Where to inject. If `$type` is `control` accepts
+	 * @type string $at       Where to inject. If `$type` is `control` accepts
 	 *                        `before` and `after`. If `$type` is `section`
 	 *                        accepts `start` and `end`. Dafault values based on
 	 *                        the `type`.
-	 *     @type string $of   Control/Section ID.
+	 * @type string $of       Control/Section ID.
 	 * }
 	 */
 	final public function start_injection( array $position ) {
@@ -1250,7 +1244,7 @@ abstract class Controls_Stack {
 	 * it stopps adding new controls to this point and continue to add controls
 	 * to the regular position in the stack.
 	 *
-	 * @since 1.7.1
+	 * @since  1.7.1
 	 * @access public
 	 */
 	final public function end_injection() {
@@ -1262,7 +1256,7 @@ abstract class Controls_Stack {
 	 *
 	 * Change or add new settings to an existing control in the stack.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param string|array $key   Setting name, or an array of key/value.
@@ -1289,17 +1283,18 @@ abstract class Controls_Stack {
 	 * wrappers like `start_controls_section()`, `start_controls_tabs()` and
 	 * `start_controls_tab()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access protected
 	 */
-	protected function _register_controls() {}
+	protected function _register_controls() {
+	}
 
 	/**
 	 * Retrieve default data.
 	 *
 	 * Get the default data. Used to reset the data on initialization.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access protected
 	 *
 	 * @return array Default data.
@@ -1320,7 +1315,7 @@ abstract class Controls_Stack {
 	 * Classes that extend `Controls_Stack` can add new process to the settings
 	 * parser.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access protected
 	 *
 	 * @return array Parsed settings.
@@ -1348,7 +1343,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the element initial configuration.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access protected
 	 *
 	 * @return array The initial config.
@@ -1365,7 +1360,7 @@ abstract class Controls_Stack {
 	 *
 	 * Get the section arguments based on section ID.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access protected
 	 *
 	 * @param string $section_id Section ID.
@@ -1389,7 +1384,7 @@ abstract class Controls_Stack {
 	 *
 	 * Register the all controls added by `_register_controls()`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access private
 	 */
 	private function _init_controls() {
@@ -1403,7 +1398,7 @@ abstract class Controls_Stack {
 	 *
 	 * Set the raw data, the ID and the parsed settings.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access protected
 	 */
 	protected function _init( $data ) {
@@ -1420,7 +1415,7 @@ abstract class Controls_Stack {
 	 * Initializing the control stack class using `$data`. The `$data` is required
 	 * for a normal instance. It is optional only for internal `type instance`.
 	 *
-	 * @since 1.4.0
+	 * @since  1.4.0
 	 * @access public
 	 *
 	 * @param array $data The data. Default is an empty array.

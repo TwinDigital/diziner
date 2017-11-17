@@ -8,24 +8,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 foreach ( $reports as $report_name => $report ) : ?>
-	<div class="elementor-system-info-section">
-		<table class="widefat">
-			<thead>
-			<tr>
-				<th style="width: 15%;"><?php echo $report['label']; ?></th>
-				<th></th>
-				<th></th>
-			</tr>
-			</thead>
-			<tbody>
+    <div class="elementor-system-info-section">
+        <table class="widefat">
+            <thead>
+            <tr>
+                <th style="width: 15%;"><?php echo $report['label']; ?></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
 			<?php
 			foreach ( $report['report'] as $field_name => $field ) :
 
 				if ( in_array( $report_name, [ 'plugins', 'network_plugins', 'mu_plugins' ] ) ) :
 					foreach ( $field['value'] as $plugin ) :
-					?>
-						<tr>
-							<td>
+						?>
+                        <tr>
+                            <td>
 								<?php
 								if ( $plugin['PluginURI'] ) :
 									$plugin_name = "<a href='{$plugin['PluginURI']}'>{$plugin['Name']}</a>";
@@ -39,8 +39,8 @@ foreach ( $reports as $report_name => $report ) : ?>
 
 								echo $plugin_name;
 								?>
-								</td>
-							<td>
+                            </td>
+                            <td>
 								<?php
 								if ( $plugin['Author'] ) :
 
@@ -53,30 +53,30 @@ foreach ( $reports as $report_name => $report ) : ?>
 									echo "By $author";
 								endif;
 								?>
-								</td>
-							<td></td>
-						</tr>
-					<?php
+                            </td>
+                            <td></td>
+                        </tr>
+						<?php
 					endforeach;
 				else :
-				?>
-					<tr>
-						<td><?php echo $field['label']; ?>:</td>
-						<td><?php echo nl2br( $field['value'] ); ?></td>
-						<td>
-						<?php
-						if ( ! empty( $field['recommendation'] ) ) :
+					?>
+                    <tr>
+                        <td><?php echo $field['label']; ?>:</td>
+                        <td><?php echo nl2br( $field['value'] ); ?></td>
+                        <td>
+							<?php
+							if ( ! empty( $field['recommendation'] ) ) :
 								echo $field['recommendation'];
 							endif;
 							?>
-							</td>
-					</tr>
-				<?php
+                        </td>
+                    </tr>
+					<?php
 				endif;
 			endforeach;
 			?>
-			</tbody>
-		</table>
-	</div>
-<?php
+            </tbody>
+        </table>
+    </div>
+	<?php
 endforeach;

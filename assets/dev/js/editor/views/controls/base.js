@@ -36,7 +36,9 @@ ControlBaseItemView = Marionette.CompositeView.extend( {
 		if ( ! _.isEmpty( responsive ) ) {
 			classes += ' elementor-control-responsive-' + responsive.max;
 		}
-
+		if ( ! ! this.model.get( 'disabled' ) ) {
+			classes += ' elementor-panel-hide';
+		}
 		return classes;
 	},
 
@@ -121,12 +123,12 @@ ControlBaseItemView = Marionette.CompositeView.extend( {
 			inputValue = $input.val(),
 			inputType = $input.attr( 'type' );
 
-		if ( -1 !== [ 'radio', 'checkbox' ].indexOf( inputType ) ) {
+		if ( - 1 !== [ 'radio', 'checkbox' ].indexOf( inputType ) ) {
 			return $input.prop( 'checked' ) ? inputValue : '';
 		}
 
 		if ( 'number' === inputType && _.isFinite( inputValue ) ) {
-			return +inputValue;
+			return + inputValue;
 		}
 
 		// Temp fix for jQuery (< 3.0) that return null instead of empty array
@@ -142,7 +144,7 @@ ControlBaseItemView = Marionette.CompositeView.extend( {
 			inputType = $input.attr( 'type' );
 
 		if ( 'checkbox' === inputType ) {
-			$input.prop( 'checked', !! value );
+			$input.prop( 'checked', ! ! value );
 		} else if ( 'radio' === inputType ) {
 			$input.filter( '[value="' + value + '"]' ).prop( 'checked', true );
 		} else {
@@ -236,7 +238,8 @@ ControlBaseItemView = Marionette.CompositeView.extend( {
 		elementor.channels.data.trigger( 'scrollbar:update' );
 	},
 
-	onReady: function() {},
+	onReady: function() {
+	},
 
 	onAfterExternalChange: function() {
 		this.hideTooltip();

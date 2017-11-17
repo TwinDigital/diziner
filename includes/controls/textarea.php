@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'item_description',
- *    	[
- *    		'label' => __( 'Description', 'plugin-domain' ),
- *    		'type' => Controls_Manager::TEXTAREA,
- *    		'default' => __( 'Default description', 'plugin-domain' ),
- *    	]
+ *        'item_description',
+ *        [
+ *            'label' => __( 'Description', 'plugin-domain' ),
+ *            'type' => Controls_Manager::TEXTAREA,
+ *            'default' => __( 'Default description', 'plugin-domain' ),
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -59,7 +60,7 @@ class Control_Textarea extends Base_Data_Control {
 	/**
 	 * Retrieve textarea control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -74,7 +75,7 @@ class Control_Textarea extends Base_Data_Control {
 	 * Get the default settings of the textarea control. Used to return the
 	 * default settings while initializing the textarea control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -93,21 +94,22 @@ class Control_Textarea extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<textarea id="<?php echo $control_uid; ?>" rows="{{ data.rows }}" data-setting="{{ data.name }}" placeholder="{{ data.placeholder }}"></textarea>
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <textarea id="<?php echo $control_uid; ?>" rows="{{ data.rows }}" data-setting="{{ data.name }}"
+                          placeholder="{{ data.placeholder }}"></textarea>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 }

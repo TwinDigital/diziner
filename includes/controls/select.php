@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,19 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'border_style',
- *    	[
- *    		'label' => __( 'Border Style', 'plugin-domain' ),
- *    		'type' => Controls_Manager::SELECT,
- *    		'default' => 'solid',
- *    		'options' => [
- *    			'solid'  => __( 'Solid', 'plugin-domain' ),
- *    			'dashed' => __( 'Dashed', 'plugin-domain' ),
- *    			'dotted' => __( 'Dotted', 'plugin-domain' ),
- *    			'double' => __( 'Double', 'plugin-domain' ),
- *    			'none'   => __( 'None', 'plugin-domain' ),
- *    		],
- *    	]
+ *        'border_style',
+ *        [
+ *            'label' => __( 'Border Style', 'plugin-domain' ),
+ *            'type' => Controls_Manager::SELECT,
+ *            'default' => 'solid',
+ *            'options' => [
+ *                'solid'  => __( 'Solid', 'plugin-domain' ),
+ *                'dashed' => __( 'Dashed', 'plugin-domain' ),
+ *                'dotted' => __( 'Dotted', 'plugin-domain' ),
+ *                'double' => __( 'Double', 'plugin-domain' ),
+ *                'none'   => __( 'None', 'plugin-domain' ),
+ *            ],
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -67,7 +68,7 @@ class Control_Select extends Base_Data_Control {
 	/**
 	 * Retrieve select control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -83,44 +84,44 @@ class Control_Select extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<select id="<?php echo $control_uid; ?>" data-setting="{{ data.name }}">
-				<#
-					var printOptions = function( options ) {
-						_.each( options, function( option_title, option_value ) { #>
-								<option value="{{ option_value }}">{{{ option_title }}}</option>
-						<# } );
-					};
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <select id="<?php echo $control_uid; ?>" data-setting="{{ data.name }}">
+                    <#
+                            var printOptions = function( options ) {
+                            _.each( options, function( option_title, option_value ) { #>
+                        <option value="{{ option_value }}">{{{ option_title }}}</option>
+                        <# } );
+                                };
 
-					if ( data.groups ) {
-						for ( var groupIndex in data.groups ) {
-							var groupArgs = data.groups[ groupIndex ];
-								if ( groupArgs.options ) { #>
-									<optgroup label="{{ groupArgs.label }}">
-										<# printOptions( groupArgs.options ) #>
-									</optgroup>
-								<# } else if ( _.isString( groupArgs ) ) { #>
-									<option value="{{ groupIndex }}">{{{ groupArgs }}}</option>
-								<# }
-						}
-					} else {
-						printOptions( data.options );
-					}
-				#>
-				</select>
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-			<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+                                if ( data.groups ) {
+                                for ( var groupIndex in data.groups ) {
+                                var groupArgs = data.groups[ groupIndex ];
+                                if ( groupArgs.options ) { #>
+                            <optgroup label="{{ groupArgs.label }}">
+                                <# printOptions( groupArgs.options ) #>
+                            </optgroup>
+                            <# } else if ( _.isString( groupArgs ) ) { #>
+                                <option value="{{ groupIndex }}">{{{ groupArgs }}}</option>
+                                <# }
+                                        }
+                                        } else {
+                                        printOptions( data.options );
+                                        }
+                                        #>
+                </select>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 }

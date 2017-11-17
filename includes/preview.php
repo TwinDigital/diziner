@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,6 +32,8 @@ class Preview {
 	 *
 	 * @since 1.0.0
 	 * @access public
+	 * @since  1.0.0
+	 * @return void
 	 */
 	public function init() {
 		if ( is_admin() || ! $this->is_preview_mode() ) {
@@ -105,6 +108,7 @@ class Preview {
 	 *
 	 * @since 1.0.0
 	 * @access public
+	 * @since 1.0.0
 	 *
 	 * @return string HTML wrapper for the builder.
 	 */
@@ -117,6 +121,8 @@ class Preview {
 	 *
 	 * @since 1.0.0
 	 * @access private
+	 * @since 1.0.0
+	 * @return void
 	 */
 	private function enqueue_styles() {
 		// Hold-on all jQuery plugins after all HTML markup render.
@@ -128,12 +134,7 @@ class Preview {
 
 		$direction_suffix = is_rtl() ? '-rtl' : '';
 
-		wp_register_style(
-			'editor-preview',
-			ELEMENTOR_ASSETS_URL . 'css/editor-preview' . $direction_suffix . $suffix . '.css',
-			[],
-			ELEMENTOR_VERSION
-		);
+		wp_register_style( 'editor-preview', ELEMENTOR_ASSETS_URL . 'css/editor-preview' . $direction_suffix . $suffix . '.css', [], ELEMENTOR_VERSION );
 
 		wp_enqueue_style( 'editor-preview' );
 
@@ -154,13 +155,7 @@ class Preview {
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_enqueue_script(
-			'elementor-inline-editor',
-			ELEMENTOR_ASSETS_URL . 'lib/inline-editor/js/inline-editor' . $suffix . '.js',
-			[],
-			'',
-			true
-		);
+		wp_enqueue_script( 'elementor-inline-editor', ELEMENTOR_ASSETS_URL . 'lib/inline-editor/js/inline-editor' . $suffix . '.js', [], '', true );
 
 		do_action( 'elementor/preview/enqueue_scripts' );
 	}
@@ -170,6 +165,7 @@ class Preview {
 	 *
 	 * @since 1.0.0
 	 * @access public
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'template_redirect', [ $this, 'init' ], 0 );

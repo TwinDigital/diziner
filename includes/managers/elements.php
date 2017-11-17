@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,9 +15,9 @@ class Elements_Manager {
 	private $_categories;
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		$this->require_files();
 
@@ -24,8 +25,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @param array        $element_data
 	 *
 	 * @param array        $element_args
@@ -61,9 +63,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_categories() {
 		if ( null === $this->_categories ) {
 			$this->init_categories();
@@ -73,9 +75,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.7.12
+	 * @since  1.7.12
 	 * @access public
-	*/
+	 */
 	public function add_category( $category_name, $category_properties, $offset = null ) {
 		if ( null === $this->_categories ) {
 			$this->init_categories();
@@ -85,17 +87,15 @@ class Elements_Manager {
 			$this->_categories[ $category_name ] = $category_properties;
 		}
 
-		$this->_categories = array_slice( $this->_categories, 0, $offset, true )
-			+ [
+		$this->_categories = array_slice( $this->_categories, 0, $offset, true ) + [
 				$category_name => $category_properties,
-			]
-			+ array_slice( $this->_categories, $offset, null, true );
+			] + array_slice( $this->_categories, $offset, null, true );
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function register_element_type( Element_Base $element ) {
 		$this->_element_types[ $element->get_name() ] = $element;
 
@@ -103,9 +103,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function unregister_element_type( $name ) {
 		if ( ! isset( $this->_element_types[ $name ] ) ) {
 			return false;
@@ -117,9 +117,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_element_types( $element_name = null ) {
 		if ( is_null( $this->_element_types ) ) {
 			$this->_init_elements();
@@ -133,9 +133,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function get_element_types_config() {
 		$config = [];
 
@@ -147,9 +147,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function render_elements_content() {
 		foreach ( $this->get_element_types() as $element_type ) {
 			$element_type->print_template();
@@ -157,9 +157,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
-	*/
+	 */
 	public function ajax_save_builder() {
 		if ( ! Plugin::$instance->editor->verify_request_nonce() ) {
 			wp_send_json_error( new \WP_Error( 'token_expired' ) );
@@ -173,7 +173,11 @@ class Elements_Manager {
 			wp_send_json_error( new \WP_Error( 'no_access' ) );
 		}
 
-		if ( isset( $_POST['status'] ) || in_array( $_POST['status'], [ DB::STATUS_PUBLISH, DB::STATUS_DRAFT, DB::STATUS_AUTOSAVE ] ) ) {
+		if ( isset( $_POST['status'] ) || in_array( $_POST['status'], [
+				DB::STATUS_PUBLISH,
+				DB::STATUS_DRAFT,
+				DB::STATUS_AUTOSAVE,
+			] ) ) {
 			$status = $_POST['status'];
 		} else {
 			$status = DB::STATUS_DRAFT;
@@ -189,9 +193,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function _init_elements() {
 		$this->_element_types = [];
 
@@ -205,9 +209,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.7.12
+	 * @since  1.7.12
 	 * @access private
-	*/
+	 */
 	private function init_categories() {
 		$this->_categories = [
 			'basic' => [
@@ -230,9 +234,9 @@ class Elements_Manager {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
-	*/
+	 */
 	private function require_files() {
 		require_once ELEMENTOR_PATH . 'includes/base/element-base.php';
 

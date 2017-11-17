@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'item_description',
- *    	[
- *    		'label' => __( 'Description', 'plugin-domain' ),
- *    		'type' => Controls_Manager::WYSIWYG,
- *    		'default' => __( 'Default description', 'plugin-domain' ),
- *    	]
+ *        'item_description',
+ *        [
+ *            'label' => __( 'Description', 'plugin-domain' ),
+ *            'type' => Controls_Manager::WYSIWYG,
+ *            'default' => __( 'Default description', 'plugin-domain' ),
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -57,7 +58,7 @@ class Control_Wysiwyg extends Base_Data_Control {
 	/**
 	 * Retrieve wysiwyg control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -73,15 +74,15 @@ class Control_Wysiwyg extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		?>
-		<label>
-			<span class="elementor-control-title">{{{ data.label }}}</span>
-			<textarea data-setting="{{ data.name }}"></textarea>
-		</label>
+        <label>
+            <span class="elementor-control-title">{{{ data.label }}}</span>
+            <textarea data-setting="{{ data.name }}"></textarea>
+        </label>
 		<?php
 	}
 }

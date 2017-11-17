@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,9 +15,9 @@ class Shapes {
 
 	/**
 	 * @static
-	 * @since 1.3.0
+	 * @since  1.3.0
 	 * @access public
-	*/
+	 */
 	public static function get_shapes( $shape = null ) {
 		if ( null === self::$shapes ) {
 			self::init_shapes();
@@ -31,22 +32,20 @@ class Shapes {
 
 	/**
 	 * @static
-	 * @since 1.3.0
+	 * @since  1.3.0
 	 * @access public
-	*/
+	 */
 	public static function filter_shapes( $by, $filter = self::FILTER_INCLUDE ) {
-		return array_filter(
-			self::get_shapes(), function( $shape ) use ( $by, $filter ) {
-				return self::FILTER_INCLUDE === $filter xor empty( $shape[ $by ] );
-			}
-		);
+		return array_filter( self::get_shapes(), function( $shape ) use ( $by, $filter ) {
+			return self::FILTER_INCLUDE === $filter xor empty( $shape[ $by ] );
+		} );
 	}
 
 	/**
 	 * @static
-	 * @since 1.3.0
+	 * @since  1.3.0
 	 * @access public
-	*/
+	 */
 	public static function get_shape_path( $shape, $is_negative = false ) {
 		$file_name = $shape;
 
@@ -59,9 +58,9 @@ class Shapes {
 
 	/**
 	 * @static
-	 * @since 1.3.0
+	 * @since  1.3.0
 	 * @access private
-	*/
+	 */
 	private static function init_shapes() {
 		self::$shapes = [
 			'mountains' => [

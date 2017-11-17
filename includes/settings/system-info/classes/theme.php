@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor\System_Info\Classes;
 
 use Elementor\System_Info\Classes\Abstracts\Base_Reporter;
@@ -42,6 +43,7 @@ class Theme_Reporter extends Base_Reporter {
 		if ( is_null( $this->theme ) ) {
 			$this->theme = wp_get_theme();
 		}
+
 		return $this->theme;
 	}
 
@@ -75,11 +77,8 @@ class Theme_Reporter extends Base_Reporter {
 		];
 
 		if ( ! $is_child_theme ) {
-			$result['recommendation'] = sprintf(
-				/* translators: %s: codex child theme URL */
-				_x( 'If you want to modify the source code of your theme, we recommend using a <a href="%s">child theme</a>.', 'System Info', 'elementor' ),
-				esc_html( 'https://codex.wordpress.org/Child_Themes' )
-			);
+			$result['recommendation'] = sprintf( /* translators: %s: codex child theme URL */
+				_x( 'If you want to modify the source code of your theme, we recommend using a <a href="%s">child theme</a>.', 'System Info', 'elementor' ), esc_html( 'https://codex.wordpress.org/Child_Themes' ) );
 		}
 
 		return $result;

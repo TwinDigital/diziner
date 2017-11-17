@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'custom_dimension',
- *    	[
- *    		'label' => __( 'Image Dimension', 'plugin-domain' ),
- *    		'type' => Controls_Manager::IMAGE_DIMENSIONS,
- *    		'description' => __( 'Crop the original image size to any custom size. Set custom width or height to keep the original size ratio.', 'plugin-domain' ),
- *    	]
+ *        'custom_dimension',
+ *        [
+ *            'label' => __( 'Image Dimension', 'plugin-domain' ),
+ *            'type' => Controls_Manager::IMAGE_DIMENSIONS,
+ *            'description' => __( 'Crop the original image size to any custom size. Set custom width or height to keep the original size ratio.', 'plugin-domain' ),
+ *        ]
  *    );
  *
  * @since 1.0.0
@@ -32,11 +33,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $placeholder Optional. The field placeholder that appears when
  *                            the field has no values. Default is empty.
  * @param array  $default     {
- *     Optional. Defautl image dimension values.
+ *                            Optional. Defautl image dimension values.
  *
- *     @type int $width  Optional. Image width. Default is empty.
- *     @type int $height Optional. Image height. Default is empty.
+ * @type int     $width       Optional. Image width. Default is empty.
+ * @type int     $height      Optional. Image height. Default is empty.
  * }
+ *
  * @param string $separator   Optional. Set the position of the control separator.
  *                            Available values are 'default', 'before', 'after'
  *                            and 'none'. 'default' will position the separator
@@ -53,16 +55,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  *     An array containing the image dimension values - width and height:
  *     `[ 'width' => '', 'height' => '' ]`.
  *
- *     @type int $width  Optional. Image width.
- *     @type int $height Optional. Image height.
-* }
+ * @type int     $width       Optional. Image width.
+ * @type int     $height      Optional. Image height.
+ * }
  */
 class Control_Image_Dimensions extends Control_Base_Multiple {
 
 	/**
 	 * Retrieve image dimensions control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -77,7 +79,7 @@ class Control_Image_Dimensions extends Control_Base_Multiple {
 	 * Get the default value of the image dimensions control. Used to return the
 	 * default values while initializing the image dimensions control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array Control default value.
@@ -95,7 +97,7 @@ class Control_Image_Dimensions extends Control_Base_Multiple {
 	 * Get the default settings of the image dimensions control. Used to return
 	 * the default settings while initializing the image dimensions control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.
@@ -114,38 +116,40 @@ class Control_Image_Dimensions extends Control_Base_Multiple {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		if ( ! $this->_is_image_editor_supports() ) : ?>
-			<div class="elementor-panel-alert elementor-panel-alert-danger">
+            <div class="elementor-panel-alert elementor-panel-alert-danger">
 				<?php _e( 'The server does not have ImageMagick or GD installed and/or enabled! Any of these libraries are required for WordPress to be able to resize images. Please contact your server administrator to enable this before continuing.', 'elementor' ); ?>
-			</div>
-		<?php
+            </div>
+			<?php
 			return;
 		endif;
 		?>
-		<# if ( data.description ) { #>
-			<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
-		<div class="elementor-control-field">
-			<label class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<div class="elementor-image-dimensions-field">
+        <# if ( data.description ) { #>
+        <div class="elementor-control-field-description">{{{ data.description }}}</div>
+        <# } #>
+        <div class="elementor-control-field">
+            <label class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <div class="elementor-image-dimensions-field">
 					<?php $control_uid = $this->get_control_uid( 'width' ); ?>
-					<input id="<?php echo $control_uid; ?>" type="text" data-setting="width" />
-					<label for="<?php echo $control_uid; ?>" class="elementor-image-dimensions-field-description"><?php _e( 'Width', 'elementor' ); ?></label>
-				</div>
-				<div class="elementor-image-dimensions-separator">x</div>
-				<div class="elementor-image-dimensions-field">
+                    <input id="<?php echo $control_uid; ?>" type="text" data-setting="width"/>
+                    <label for="<?php echo $control_uid; ?>"
+                           class="elementor-image-dimensions-field-description"><?php _e( 'Width', 'elementor' ); ?></label>
+                </div>
+                <div class="elementor-image-dimensions-separator">x</div>
+                <div class="elementor-image-dimensions-field">
 					<?php $control_uid = $this->get_control_uid( 'height' ); ?>
-					<input id="<?php echo $control_uid; ?>" type="text" data-setting="height" />
-					<label for="<?php echo $control_uid; ?>" class="elementor-image-dimensions-field-description"><?php _e( 'Height', 'elementor' ); ?></label>
-				</div>
-				<button class="elementor-button elementor-button-success elementor-image-dimensions-apply-button"><?php _e( 'Apply', 'elementor' ); ?></button>
-			</div>
-		</div>
+                    <input id="<?php echo $control_uid; ?>" type="text" data-setting="height"/>
+                    <label for="<?php echo $control_uid; ?>"
+                           class="elementor-image-dimensions-field-description"><?php _e( 'Height', 'elementor' ); ?></label>
+                </div>
+                <button class="elementor-button elementor-button-success elementor-image-dimensions-apply-button"><?php _e( 'Apply', 'elementor' ); ?></button>
+            </div>
+        </div>
 		<?php
 	}
 
@@ -154,7 +158,7 @@ class Control_Image_Dimensions extends Control_Base_Multiple {
 	 *
 	 * Used to determine whether the editor supports a given image mime-type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access private
 	 *
 	 * @return bool Whether the editor supports the given mime-type.
@@ -163,6 +167,7 @@ class Control_Image_Dimensions extends Control_Base_Multiple {
 		$arg = [
 			'mime_type' => 'image/jpeg',
 		];
+
 		return ( wp_image_editor_supports( $arg ) );
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * method):
  *
  *    $this->add_control(
- *    	'widget_title',
- *    	[
- *    		'label' => __( 'Text', 'plugin-domain' ),
- *    		'type' => Controls_Manager::TEXT,
- *    		'default' => __( 'Default text', 'plugin-domain' ),
- *    		'placeholder' => __( 'Type your text here', 'plugin-domain' ),
- *    	]
+ *        'widget_title',
+ *        [
+ *            'label' => __( 'Text', 'plugin-domain' ),
+ *            'type' => Controls_Manager::TEXT,
+ *            'default' => __( 'Default text', 'plugin-domain' ),
+ *            'placeholder' => __( 'Type your text here', 'plugin-domain' ),
+ *        ]
  *    );
  *
  * PHP usage (inside `Widget_Base::render()` method):
@@ -61,7 +62,7 @@ class Control_Text extends Base_Data_Control {
 	/**
 	 * Retrieve text control type.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Control type.
@@ -77,21 +78,23 @@ class Control_Text extends Base_Data_Control {
 	 * template. The variables for the class are available using `data` JS
 	 * object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function content_template() {
 		$control_uid = $this->get_control_uid();
 		?>
-		<div class="elementor-control-field">
-			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
-			<div class="elementor-control-input-wrapper">
-				<input id="<?php echo $control_uid; ?>" type="{{ data.input_type }}" class="tooltip-target" data-tooltip="{{ data.title }}" title="{{ data.title }}" data-setting="{{ data.name }}" placeholder="{{ data.placeholder }}" />
-			</div>
-		</div>
-		<# if ( data.description ) { #>
-		<div class="elementor-control-field-description">{{{ data.description }}}</div>
-		<# } #>
+        <div class="elementor-control-field">
+            <label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
+            <div class="elementor-control-input-wrapper">
+                <input id="<?php echo $control_uid; ?>" type="{{ data.input_type }}" class="tooltip-target"
+                       data-tooltip="{{ data.title }}" title="{{ data.title }}" data-setting="{{ data.name }}"
+                       placeholder="{{ data.placeholder }}"/>
+            </div>
+        </div>
+        <# if ( data.description ) { #>
+            <div class="elementor-control-field-description">{{{ data.description }}}</div>
+            <# } #>
 		<?php
 	}
 
@@ -101,7 +104,7 @@ class Control_Text extends Base_Data_Control {
 	 * Get the default settings of the text control. Used to return the
 	 * default settings while initializing the text control.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 *
 	 * @return array Control default settings.

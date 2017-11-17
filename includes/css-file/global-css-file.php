@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,15 +13,15 @@ class Global_CSS_File extends CSS_File {
 	const FILE_HANDLER_ID = 'elementor-global';
 
 	/**
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
-	*/
+	 */
 	public function get_name() {
 		return 'global';
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return array
 	 */
@@ -29,8 +30,9 @@ class Global_CSS_File extends CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
+	 *
 	 * @param string $meta
 	 */
 	protected function update_meta( $meta ) {
@@ -38,7 +40,7 @@ class Global_CSS_File extends CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return string
 	 */
@@ -47,15 +49,15 @@ class Global_CSS_File extends CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
-	*/
+	 */
 	protected function render_css() {
 		$this->render_schemes_css();
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return string
 	 */
@@ -64,15 +66,15 @@ class Global_CSS_File extends CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
-	*/
+	 */
 	protected function get_inline_dependency() {
 		return 'elementor-frontend';
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access protected
 	 * @return bool
 	 */
@@ -95,9 +97,9 @@ class Global_CSS_File extends CSS_File {
 	}
 
 	/**
-	 * @since 1.2.0
+	 * @since  1.2.0
 	 * @access private
-	*/
+	 */
 	private function render_schemes_css() {
 		$elementor = Plugin::$instance;
 
@@ -105,25 +107,23 @@ class Global_CSS_File extends CSS_File {
 			$scheme_controls = $widget->get_scheme_controls();
 
 			foreach ( $scheme_controls as $control ) {
-				$this->add_control_rules(
-					$control, $widget->get_controls(), function( $control ) use ( $elementor ) {
-						$scheme_value = $elementor->schemes_manager->get_scheme_value( $control['scheme']['type'], $control['scheme']['value'] );
+				$this->add_control_rules( $control, $widget->get_controls(), function( $control ) use ( $elementor ) {
+					$scheme_value = $elementor->schemes_manager->get_scheme_value( $control['scheme']['type'], $control['scheme']['value'] );
 
-						if ( empty( $scheme_value ) ) {
-							return null;
-						}
+					if ( empty( $scheme_value ) ) {
+						return null;
+					}
 
-						if ( ! empty( $control['scheme']['key'] ) ) {
-							$scheme_value = $scheme_value[ $control['scheme']['key'] ];
-						}
+					if ( ! empty( $control['scheme']['key'] ) ) {
+						$scheme_value = $scheme_value[ $control['scheme']['key'] ];
+					}
 
-						if ( empty( $scheme_value ) ) {
-							return null;
-						}
+					if ( empty( $scheme_value ) ) {
+						return null;
+					}
 
-						return $scheme_value;
-					}, [ '{{WRAPPER}}' ], [ '.elementor-widget-' . $widget->get_name() ]
-				);
+					return $scheme_value;
+				}, [ '{{WRAPPER}}' ], [ '.elementor-widget-' . $widget->get_name() ] );
 			}
 		}
 	}
